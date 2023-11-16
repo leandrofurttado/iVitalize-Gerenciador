@@ -1,0 +1,50 @@
+.Input_Content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    position: relative;
+}
+
+.Input_Content label{
+    position: absolute;
+    top: 14px;
+    left: 40px;
+    font-size: 20px;
+}
+
+.LabelPassword{
+    width: 20px;
+    height: 30px;
+    position: relative;
+    top: 14px;
+    margin-left: 300px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.InputDefault {
+    border: none;
+    width: 350px;
+    height: 50px;
+    border-bottom: 1px solid #333;
+    padding-left: 40px;
+    font-size: 16px; 
+    
+}
+
+.backgroundGreen input {
+    border: none;
+    width: 350px;
+    height: 50px;
+    border-bottom: 1px solid #333;
+    background-color: #dff5e5;
+    padding-left: 40px;
+    font-size: 16px; 
+    
+}
+
+.Input_Content input:focus {
+    outline: none;
+    border-bottom: 1px solid rgb(63, 248, 63)
+}

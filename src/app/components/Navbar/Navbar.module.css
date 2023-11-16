@@ -1,0 +1,58 @@
+.NavBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.aboveBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background-color: #80d798;
+}
+
+.aboveBar img {
+    margin: auto;
+}
+
+.imageUser {
+    position: absolute;
+    right: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    background-color: #e0dfdf;
+
+}
+
+.RedirectBar {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0dfdf;
+    width: 100%;
+    height: 60px;
+}
+
+.RedirectBar li {
+    margin: 0 10px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+
+}
+
+.RedirectBar li a{
+    text-decoration: none;
+    color: black;
+}
+
+.RedirectBar li:hover {
+    border-bottom: 5px solid #80d798;
+}
