@@ -5,30 +5,28 @@
   z-index: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: rgb(242, 242, 242)
+  justify-content: space-around;
+  background-color: rgb(242, 242, 242);
+  padding-inline-start: 200px
 }
 
 
-.Container_Form{
+.Container_Form {
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
   background-color: #dff5e5;
   width: 400px;
-  height: 800px;
+  height: 650px;
   border-radius: 15px;
   position: relative;
   z-index: 2;
-  left: 500px;
-  margin-right: 2%;
   box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.2);
-
 }
 
 .Container_Form div {
-  margin-top: 50px;
+  margin-top: 20px;
   top: 20px;
   display: flex;
   flex-direction: column;
