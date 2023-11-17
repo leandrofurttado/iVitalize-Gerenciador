@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
 
+
 const poppins = Poppins({
     subsets: ['latin'],
     weight: '500'
@@ -13,7 +14,7 @@ export default function Navbar() {
         <nav className={`${poppins.className} ${styles.NavBar}`}>
             <div className={styles.aboveBar}>
                 <Image
-                    src='/images/Slogan.png'
+                    src={`/images/Slogan.png`}
                     width={200}
                     height={80}
                     alt='Logo'

@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation"
 import { toast } from 'react-toastify';
 
 
+
 const poppins = Poppins({
   subsets: ['latin'],
   weight: '800'
@@ -63,15 +64,15 @@ export default function Login() {
   return (
     <div className={`${styles.main_content} ${poppins.className}`}>
       <Image
-        src='/images/Slogan.png'
+        src={`/images/Slogan.png`}
         width={500}
         height={300}
-        alt="Slogan" />
+        alt="Logo Slogan" />
       <div className={styles.Container_Form}>
         <div>
           <h1>Bem Vindo!</h1>
           <Image
-            src='/images/iconIvitalizer.png'
+            src={`/images/IconIvitalizer.png`}
             width={150}
             height={150}
             alt="IconIvitalizer" />
