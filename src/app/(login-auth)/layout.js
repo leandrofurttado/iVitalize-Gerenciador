@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 
 export const metadata = {
-    title: 'Gerenciador Ivitalize - Login',
+    title: 'Gerenciador iVitalize - Login',
   }
 
 

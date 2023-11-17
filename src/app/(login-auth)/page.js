@@ -22,24 +22,29 @@ const poppins = Poppins({
   weight: '800'
 })
 
+const poppins_regular = Poppins({
+  subsets: ['latin'],
+  weight: '300'
+})
+
 
 export default function Login() {
 
-  
+
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const router = useRouter()
 
-  async function handleSubmit(e){
+  async function handleSubmit(e) {
     e.preventDefault()
 
-    if(email === '' || password === ''){
+    if (email === '' || password === '') {
       toast.warn('Todos os campos abaixo deverão ser preenchidos')
       return
     }
-    
+
     //Chama nosso credentials com a função de logar envinado nossos dados coletados dos inputs email e password
     const result = await signIn('credentials', {
       email,
@@ -78,10 +83,13 @@ export default function Login() {
             alt="IconIvitalizer" />
         </div>
         <form >
-          <Input onChange={(e) => {setEmail(e.target.value)}} type='email' name='email' placeholder='Digite seu email' BackgroundInput='backgroundGreen' icon='FaEnvelope' />
-          <Input onChange={(e) => {setPassword(e.target.value)}} type='password' name='Senha' placeholder='Digite sua senha' BackgroundInput='backgroundGreen' icon='FaLock' showPass={'true'} />
+          <Input onChange={(e) => { setEmail(e.target.value) }} type='email' name='email' placeholder='Digite seu email' BackgroundInput='backgroundGreen' icon='FaEnvelope' />
+          <Input onChange={(e) => { setPassword(e.target.value) }} type='password' name='Senha' placeholder='Digite sua senha' BackgroundInput='backgroundGreen' icon='FaLock' showPass={'true'} />
         </form>
         <Button onClick={handleSubmit} className={styles.Button} name='Entrar' type='submit' />
+        <div className={styles.Copyright}>
+          <span className={`${poppins_regular.className}`}>Todos os Direitos Reservados iVitalize © 2023</span>
+        </div>
       </div>
 
     </div>
