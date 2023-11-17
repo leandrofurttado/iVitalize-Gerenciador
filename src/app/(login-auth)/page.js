@@ -88,7 +88,7 @@ export default function Login() {
         </form>
         <Button onClick={handleSubmit} className={styles.Button} name='Entrar' type='submit' />
         <div className={styles.Copyright}>
-          <span className={`${poppins_regular.className}`}>Todos os Direitos Reservados iVitalize © 2023</span>
+          <span className={`${poppins_regular.className}`}>iVitalize © 2023</span>
         </div>
       </div>
 
