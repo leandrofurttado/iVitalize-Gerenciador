@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 
 export const metadata = {
-    title: 'Ivitalize - Alunos',
+    title: 'iVitalize - Alunos',
   }
 
 //Protege a rota quando a sessão não está ativa
