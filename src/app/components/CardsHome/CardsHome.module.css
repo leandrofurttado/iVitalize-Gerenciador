@@ -1,0 +1,23 @@
+.Card{
+    background-color: #f3f3f3;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.Card svg{
+    font-size: 2em;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.Card h1{
+    margin-left: 2.2em;
+}
+
+.Card h3{
+    margin: 0 auto;
+}

@@ -1,0 +1,11 @@
+.Main{
+    height: 100vh;
+}
+
+.cardSection{
+    height: 200px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
