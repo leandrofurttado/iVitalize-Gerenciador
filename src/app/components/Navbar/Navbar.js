@@ -25,11 +25,11 @@ const poppins = Poppins({
 
 
 
-export default  function Navbar() {
+export default function Navbar() {
 
     const router = useRouter()
     //Desloga
-    async function logout(){
+    async function logout() {
         await signOut({
             redirect: false
         })
@@ -57,9 +57,9 @@ export default  function Navbar() {
                 />
                 <div className={styles.imageUser} onClick={handleClick}>
                     <Image
-                        src=''
-                        width={20}
-                        height={20}
+                        src='/images/Personal.jpeg'
+                        width={50}
+                        height={50}
                         alt='UserImg'
                     />
 
@@ -78,6 +78,9 @@ export default  function Navbar() {
 
             </div>
             <ul className={styles.RedirectBar}>
+                <li>
+                    <Link href='/home'> HOME</Link>
+                </li>
                 <li>
                     <Link href='/alunos'> ALUNOS</Link>
                 </li>

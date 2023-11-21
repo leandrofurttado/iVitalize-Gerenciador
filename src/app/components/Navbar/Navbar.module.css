@@ -24,12 +24,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 100%;
     background-color: #e0dfdf;
     cursor: pointer;
 
+}
+
+.imageUser img{
+    border-radius: 100%;
 }
 
 

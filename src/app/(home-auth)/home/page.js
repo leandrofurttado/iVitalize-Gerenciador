@@ -4,6 +4,8 @@ import Navbar from "@/app/components/Navbar/Navbar";
 import styles from './page.module.css'
 
 import { Poppins } from 'next/font/google'
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 
 const poppins = Poppins({
     subsets: ['latin'],

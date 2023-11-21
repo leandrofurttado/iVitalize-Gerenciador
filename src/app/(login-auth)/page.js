@@ -9,11 +9,12 @@ import styles from '../page.module.css'
 
 import { Poppins } from 'next/font/google'
 import '../globals.css'
-import { useState } from "react"
+import {  useState } from "react"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 
 import { toast } from 'react-toastify';
+
 
 
 
@@ -67,6 +68,7 @@ export default function Login() {
 
 
   return (
+  
     <div className={`${styles.main_content} ${poppins.className}`}>
       <Image
         src={`/images/Slogan.png`}
@@ -93,5 +95,6 @@ export default function Login() {
       </div>
 
     </div>
+
   )
 }
