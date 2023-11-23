@@ -10,7 +10,7 @@ const poppins = Poppins({
 export default function Button({ name, type, onClick }) {
     return (
         <div className={poppins.className}>
-            <button onClick={onClick} className={`${styles.Button} ${poppins.className}`} type={type}>{name}</button>
+            <button onClick={onClick} className={`${styles.Button} ${poppins.className}`} type={type}>{typeof name === 'object' ? name : <span>{name}</span>}</button>
         </div>
     )
 }

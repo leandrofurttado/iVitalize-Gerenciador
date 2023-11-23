@@ -14,6 +14,7 @@ import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 
 import { toast } from 'react-toastify';
+import LoadingLogin from "../components/LoadingLogin/loading"
 
 
 
@@ -31,8 +32,7 @@ const poppins_regular = Poppins({
 
 export default function Login() {
 
-
-
+  const [refresh, setRefresh] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -46,6 +46,7 @@ export default function Login() {
       return
     }
 
+    setRefresh(true);
     //Chama nosso credentials com a função de logar envinado nossos dados coletados dos inputs email e password
     const result = await signIn('credentials', {
       email,
@@ -56,6 +57,7 @@ export default function Login() {
 
     if (result.error) {
       console.log(result)
+      setRefresh(false);
       toast.error('Credenciais incorretas!')
       return
     }
@@ -88,7 +90,11 @@ export default function Login() {
           <Input onChange={(e) => { setEmail(e.target.value) }} type='email' name='email' placeholder='Digite seu email' BackgroundInput='backgroundGreen' icon='FaEnvelope' />
           <Input onChange={(e) => { setPassword(e.target.value) }} type='password' name='Senha' placeholder='Digite sua senha' BackgroundInput='backgroundGreen' icon='FaLock' showPass={'true'} />
         </form>
-        <Button onClick={handleSubmit} className={styles.Button} name='Entrar' type='submit' />
+        <Button onClick={handleSubmit} className={styles.Button} name={!!refresh ? '' : 'Entrar'} type='submit' />
+        {
+         !!refresh &&
+         <LoadingLogin />
+        }
         <div className={styles.Copyright}>
           <span className={`${poppins_regular.className}`}>iVitalize © 2023</span>
         </div>

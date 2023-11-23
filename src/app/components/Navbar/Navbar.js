@@ -10,9 +10,6 @@ import { Poppins } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { MagicMotion } from "react-magic-motion"
-
-
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -66,13 +63,10 @@ export default function Navbar() {
                 </div>
 
                 {clickImg && (
-                    <MagicMotion>
-                        <div className={`${styles.modalUser} ${styles.show}`}>
-                            <button>Perfil</button>
-                            <button onClick={logout}>Sair</button>
-                        </div>
-                    </MagicMotion>
-
+                    <div className={`${styles.modalUser} ${styles.show}`}>
+                        <button>Perfil</button>
+                        <button onClick={logout}>Sair</button>
+                    </div>
                 )}
 
 

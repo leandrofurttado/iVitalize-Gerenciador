@@ -35,7 +35,6 @@ const nextAuthOptions = {
                 
 
                 if (user.tipo == 'sucesso' && response.ok){
-                    console.log('Deuuuuuuu!')
                     console.log(user.status)
                     return user
                 }
