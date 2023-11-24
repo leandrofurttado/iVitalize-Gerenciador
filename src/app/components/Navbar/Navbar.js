@@ -67,20 +67,10 @@ export default function Navbar() {
                 </div>
 
                 {clickImg && (
-<<<<<<< Updated upstream
                     <div className={`${styles.modalUser} ${styles.show}`}>
                         <button>Perfil</button>
                         <button onClick={logout}>Sair</button>
                     </div>
-=======
-                    <MagicMotion>
-                        <div className={`${styles.modalUser} ${styles.show}`} >
-                            <button>Perfil</button>
-                            <button onClick={logout}>Sair</button>
-                        </div>
-                    </MagicMotion>
-
->>>>>>> Stashed changes
                 )}
 
 

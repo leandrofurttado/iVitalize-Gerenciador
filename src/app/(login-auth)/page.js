@@ -34,11 +34,7 @@ const poppins_regular = Poppins({
 
 export default function Login() {
 
-<<<<<<< Updated upstream
   const [refresh, setRefresh] = useState(false)
-=======
-
->>>>>>> Stashed changes
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
