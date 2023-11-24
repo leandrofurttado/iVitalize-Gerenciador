@@ -1,10 +1,4 @@
-.loading_wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
+
   .loading_circle {
     border: 4px solid #000000;
     border-top: 4px solid transparent;
@@ -12,6 +6,7 @@
     width: 30px;
     height: 30px;
     animation: spin 1s linear infinite;
+    margin-bottom: 40px;
   }
   
   @keyframes spin {

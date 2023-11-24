@@ -1,10 +1,12 @@
 .Button{
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
     width: 100px;
     height: 40px;
     background-color: #80d798;
     padding: .5em;
-    top: 85px;
     font-size: 16px;
     border-radius: 5px;
     transition: .4s;

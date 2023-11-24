@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation"
 
 
 import { toast } from 'react-toastify';
-import LoadingLogin from "../components/LoadingLogin/loading"
+
 
 
 
@@ -92,11 +92,7 @@ export default function Login() {
           <Input onChange={(e) => { setEmail(e.target.value) }} type='email' name='email' placeholder='Digite seu email' BackgroundInput='backgroundGreen' icon='FaEnvelope' />
           <Input onChange={(e) => { setPassword(e.target.value) }} type='password' name='Senha' placeholder='Digite sua senha' BackgroundInput='backgroundGreen' icon='FaLock' showPass={'true'} />
         </form>
-        <Button onClick={handleSubmit} className={styles.Button} name={!!refresh ? '' : 'Entrar'} type='submit' />
-        {
-         !!refresh &&
-         <LoadingLogin />
-        }
+        <Button onClick={handleSubmit} className={styles.Button} name='Entrar' type='submit' refresh={refresh ? true : false} />
         <div className={styles.Copyright}>
           <span className={`${poppins_regular.className}`}>iVitalize © 2023</span>
         </div>

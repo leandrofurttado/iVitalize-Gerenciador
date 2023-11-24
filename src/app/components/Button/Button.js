@@ -1,5 +1,6 @@
 import styles from './Button.module.css'
 import { Poppins } from 'next/font/google'
+import LoadingLogin from '../LoadingLogin/loading'
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -7,10 +8,14 @@ const poppins = Poppins({
 })
 
 
-export default function Button({ name, type, onClick }) {
+
+export default function Button({ name, type, onClick, refresh }) {
+
     return (
         <div className={poppins.className}>
-            <button onClick={onClick} className={`${styles.Button} ${poppins.className}`} type={type}>{typeof name === 'object' ? name : <span>{name}</span>}</button>
+            <button onClick={onClick} className={`${styles.Button} ${poppins.className}`} type={type}>
+                {refresh ? <LoadingLogin /> : name}
+            </button>
         </div>
     )
 }
