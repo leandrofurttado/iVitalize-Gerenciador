@@ -3,6 +3,11 @@
     height: 100vh;
 }
 
+.Main hr{
+    border-bottom: 1px solid #ccc;
+    margin: 0 350px
+}
+
 .barAlunos{
     height: 120px;
     display: flex;
@@ -27,6 +32,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 30px;
 }
 
 .userImage{
@@ -74,8 +80,18 @@
     height: 100%;
     width: 1000px;
     margin-top: 5px;
-    margin-right: 600px;
+    margin-right: 500px;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+}
+
+.localization{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    width: 700px;
+    align-items: center;
+    margin-left: 360px;
+   
 }

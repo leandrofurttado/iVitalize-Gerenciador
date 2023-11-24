@@ -3,11 +3,13 @@
     flex-direction: column;
 }
 
-.inputConfig input{
+.input{
     width: 200px;
     height: 30px;
     border-radius: 20px;
     background-color: #eee;
+    padding-left: 10px;
+    margin-right: 12px;
 }
 
 .inputConfig input:focus{
@@ -17,4 +19,22 @@
 
 .inputConfig label{
     color: #bbb;
+}
+
+/* Inputs length */
+
+.input_small{
+    width: 150px;
+}
+
+.input_medium{
+    width: 250px;
+}
+
+.input_large{
+    width: 300px;
+}
+
+.input_biggest{
+    width: 400px;
 }
