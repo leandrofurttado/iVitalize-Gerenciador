@@ -4,14 +4,14 @@
 import { NextAuthOptions } from '@/app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 import { signOut } from 'next-auth/react'
-
+import { motion } from 'framer-motion';
 import styles from './Navbar.module.css'
 import { Poppins } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
 
 
-import { useEffect,useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 
@@ -39,12 +39,13 @@ export default function Navbar() {
     function openTab() {
         //Quando mouse estiver por cima, ativa o modal
         setClickImg(!clickImg)
+        
     }
 
-  
 
-   
- 
+
+
+
     return (
 
         <nav className={`${poppins.className} ${styles.NavBar}`} >
@@ -67,10 +68,15 @@ export default function Navbar() {
                 </div>
 
                 {clickImg && (
-                    <div className={`${styles.modalUser} ${styles.show}`}>
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }} 
+                        animate={{ opacity: 1, y: 0 }}    
+                        transition={{ duration: 0.5 }}
+                        className={`${styles.modalUser} ${styles.show}`}
+                    >
                         <button>Perfil</button>
-                        <button onClick={logout}>Sair</button>
-                    </div>
+                        <button className={`${styles.exit}`} onClick={logout}>Sair</button>
+                    </motion.div>
                 )}
 
 

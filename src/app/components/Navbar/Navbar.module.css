@@ -20,7 +20,7 @@
 
 .imageUser {
     position: absolute;
-    right: 40px;
+    right: 55px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,6 +32,7 @@
 
 }
 
+
 .imageUser img{
     border-radius: 100%;
 }
@@ -39,13 +40,14 @@
 
 .modalUser {
     position: absolute;
-    top: 9%;
-    right: 2%;
+    top: 11%;
+    right: 20px;
     width: 8%;
     height: 10%;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    border-bottom-left-radius: 15%;
+    border-bottom-right-radius: 15%;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -64,6 +66,11 @@
 
 .modalUser button:hover{
     background-color: #80d798;
+}
+
+.modalUser .exit:hover{
+    background-color: rgb(186, 0, 12);
+    color: white;
 }
 
 .RedirectBar {

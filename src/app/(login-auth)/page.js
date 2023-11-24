@@ -2,23 +2,15 @@
 
 import Input from "../components/Input/Input"
 import Button from "../components/Button/Button"
-
 import Image from 'next/image'
-
 import styles from '../page.module.css'
-
 import { Poppins } from 'next/font/google'
 import '../globals.css'
-import {  useState } from "react"
+import { useState } from "react"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
-
-
-
 import { toast } from 'react-toastify';
-
-
-
+import { motion } from 'framer-motion';
 
 
 const poppins = Poppins({
@@ -39,7 +31,7 @@ export default function Login() {
   const [password, setPassword] = useState('')
 
   const router = useRouter()
-  
+
   async function handleSubmit(e) {
     e.preventDefault()
 
@@ -71,7 +63,7 @@ export default function Login() {
 
 
   return (
-  
+
     <div className={`${styles.main_content} ${poppins.className}`}>
       <Image
         src={`/images/Slogan.png`}
@@ -79,7 +71,10 @@ export default function Login() {
         height={300}
         alt="Logo Slogan"
         priority />
-      <div className={styles.Container_Form}>
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 2 }} className={styles.Container_Form}>
         <div>
           <h1>Bem Vindo!</h1>
           <Image
@@ -96,9 +91,9 @@ export default function Login() {
         <div className={styles.Copyright}>
           <span className={`${poppins_regular.className}`}>iVitalize © 2023</span>
         </div>
-      </div>
+      </motion.div>
 
-    </div>
+    </div >
 
   )
 }
