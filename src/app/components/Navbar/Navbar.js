@@ -11,7 +11,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 
-import { useState } from 'react'
+import { useEffect,useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 
@@ -36,15 +36,18 @@ export default function Navbar() {
 
     const [clickImg, setClickImg] = useState(false)
 
-    function handleClick() {
+    function openTab() {
         //Quando mouse estiver por cima, ativa o modal
         setClickImg(!clickImg)
     }
 
+  
 
+   
+ 
     return (
 
-        <nav className={`${poppins.className} ${styles.NavBar}`}>
+        <nav className={`${poppins.className} ${styles.NavBar}`} >
             <div className={styles.aboveBar}>
                 <Image
                     src={`/images/ivitalize_ngtv.png`}
@@ -52,21 +55,32 @@ export default function Navbar() {
                     height={50}
                     alt='Logo'
                 />
-                <div className={styles.imageUser} onClick={handleClick}>
+                <div className={styles.imageUser}  >
                     <Image
                         src='/images/Personal.jpeg'
                         width={50}
                         height={50}
                         alt='UserImg'
+                        onClick={openTab}
                     />
 
                 </div>
 
                 {clickImg && (
+<<<<<<< Updated upstream
                     <div className={`${styles.modalUser} ${styles.show}`}>
                         <button>Perfil</button>
                         <button onClick={logout}>Sair</button>
                     </div>
+=======
+                    <MagicMotion>
+                        <div className={`${styles.modalUser} ${styles.show}`} >
+                            <button>Perfil</button>
+                            <button onClick={logout}>Sair</button>
+                        </div>
+                    </MagicMotion>
+
+>>>>>>> Stashed changes
                 )}
 
 

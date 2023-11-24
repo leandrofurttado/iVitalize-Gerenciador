@@ -1,0 +1,81 @@
+
+.Main{
+    height: 100vh;
+}
+
+.barAlunos{
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3em;
+    
+}
+
+.containerInfos{
+    display: flex;
+    height: 250px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px 60px;
+
+}
+
+.containerUserImg{
+    height: 100%;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userImage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttonsImage{
+    margin-top: 10px;
+    display: flex;
+    width: 170px;
+    justify-content: space-evenly;
+}
+
+.btnAdd{
+    height: 22px;
+    width: 80px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #80d798;
+    transition: .4s;
+}
+
+.btnAdd:hover{
+    background-color: #84e8a1;
+    color: #FFF;
+}
+
+.btnRemove{
+    height: 22px;
+    width: 80px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #d32815;
+    transition: .4s;
+}
+
+.btnRemove:hover{
+    background-color: #e64439;
+    color: #FFF;
+}
+
+.inputsAluno{
+    height: 100%;
+    width: 1000px;
+    margin-top: 5px;
+    margin-right: 600px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}

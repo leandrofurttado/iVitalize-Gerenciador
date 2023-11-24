@@ -1,0 +1,79 @@
+
+.Main{
+    height: 100vh;
+}
+
+.barAlunos{
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3em;
+    
+}
+
+.barAlunos div{
+    width: 350px;
+    display: flex;
+    height: 48px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.barAlunos div button{
+    height: 30px;
+    width: 120px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(243, 243, 243);
+    transition: .4s;
+}
+
+.barAlunos div button:hover{
+    background-color: #80d798;
+    color: black;
+}
+
+.barAlunos input{
+    background-color: rgb(243, 243, 243);
+    width: 170px;
+    height: 30px;
+    border-radius: 20px;
+    margin-right: 25px;
+    padding-right: 35px;
+    padding-left: 1em;
+}
+
+.barAlunos input:focus{
+    outline: none;
+    border: 1px solid ;
+    border-color: #80d798;;
+}
+
+.barAlunos div svg{
+    position: absolute;
+    font-size: 23px;
+    cursor: pointer;
+    right: 11.5%;
+    top: 24.1%;
+    color: #aaa;
+}
+
+.barAlunos div svg:hover{
+    color: #707070;
+}
+
+
+.Main hr{
+    margin: auto;
+    border-bottom: 1px solid #ddd;
+    width: 95%;
+}
+
+.cardsAlunos{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}

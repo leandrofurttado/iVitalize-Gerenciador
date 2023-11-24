@@ -24,14 +24,14 @@ export default function Input({ type, name, placeholder, icon, BackgroundInput, 
 
     return (
         <div className={`${styles.Input_Content} ${styles[`${BackgroundInput}`]}`}>
-            <label for={name}> <IconComponent iconName={icon} /></label>
+            <label> <IconComponent iconName={icon} /></label>
             {type === 'email' && (
                 <input required onChange={onChange} type={type} placeholder={placeholder} className={styles.InputDefault} />
             )}
 
             {showPass && (
                 <>
-                    <label for={name} className={styles.LabelPassword} onClick={ToggleShowPassword} ><IconComponent iconName={!showPassword ? 'FaEyeSlash' : 'FaEye'} /> </label>
+                    <label className={styles.LabelPassword} onClick={ToggleShowPassword} ><IconComponent iconName={!showPassword ? 'FaEyeSlash' : 'FaEye'} /> </label>
                     <input required onChange={onChange} type={!showPassword ? type : 'text'} placeholder={placeholder} className={styles.InputDefault} />
                 </>
             )}

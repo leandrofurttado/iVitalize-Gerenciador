@@ -1,0 +1,70 @@
+.cardContainer{
+    width: 95%;
+    height: 170px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 0 1em;
+}
+
+
+
+.dataAluno{
+  
+    width: 350px;
+    display: flex;
+    align-items: center;
+}
+
+.infoAluno h4{
+    margin-bottom: .2em;
+}
+
+.alunoImg{
+    background-color: #ddd;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    margin-right: 1em;
+}
+
+.buttons{
+    display: flex;
+
+}
+
+.editButton{
+    height: 30px;
+    width: 60px;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: rgb(243, 243, 243);
+    transition: .4s;
+}
+
+.editButton:hover{
+    background-color: #80d798;
+}
+
+.deleteButton{
+    height: 30px;
+    width: 40px;
+    border-radius: 5px;
+    background-color: #bd1e0c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.deleteButton:hover{
+    background-color: #ed1b0c;
+}
+
+.deleteButton svg{
+    font-size: 16px;
+    color: #eee;
+}

@@ -1,0 +1,20 @@
+.inputConfig{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputConfig input{
+    width: 200px;
+    height: 30px;
+    border-radius: 20px;
+    background-color: #eee;
+}
+
+.inputConfig input:focus{
+    outline: none;
+    border: 1px solid #aaa;
+}
+
+.inputConfig label{
+    color: #bbb;
+}

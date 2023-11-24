@@ -4,8 +4,7 @@ import Navbar from "@/app/components/Navbar/Navbar";
 import styles from './page.module.css'
 
 import { Poppins } from 'next/font/google'
-import { Suspense } from "react";
-import Loading from "@/app/loading";
+
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -15,7 +14,7 @@ const poppins = Poppins({
 export default function Page() {
     return (
         <main className={`${poppins.className} ${styles.Main}`}>
-            <Navbar />
+             <Navbar/>
             <section className={styles.cardSection}>
                 <CardsHome icon={'FaUsers'} name='ALUNOS CADASTRADOS ATIVOS' value='2567' />
                 <CardsHome icon={'FaUserPlus'} name='MATRÍCULAS REALIZADAS' value='3127' />

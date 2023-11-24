@@ -13,6 +13,8 @@ import {  useState } from "react"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 
+
+
 import { toast } from 'react-toastify';
 import LoadingLogin from "../components/LoadingLogin/loading"
 
@@ -32,12 +34,16 @@ const poppins_regular = Poppins({
 
 export default function Login() {
 
+<<<<<<< Updated upstream
   const [refresh, setRefresh] = useState(false)
+=======
+
+>>>>>>> Stashed changes
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const router = useRouter()
-
+  
   async function handleSubmit(e) {
     e.preventDefault()
 
@@ -65,7 +71,6 @@ export default function Login() {
     //Deleta o historico para home, então o voltar n jogara mais para o login
     router.replace('/home')
     toast.success('Login realizado com sucesso!')
-
   }
 
 
@@ -76,7 +81,8 @@ export default function Login() {
         src={`/images/Slogan.png`}
         width={500}
         height={300}
-        alt="Logo Slogan" />
+        alt="Logo Slogan"
+        priority />
       <div className={styles.Container_Form}>
         <div>
           <h1>Bem Vindo!</h1>
