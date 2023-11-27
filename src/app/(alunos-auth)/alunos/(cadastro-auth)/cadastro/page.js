@@ -2,6 +2,7 @@ import { Poppins } from 'next/font/google'
 import styles from './page.module.css'
 import Image from 'next/image'
 import InputsCadastro from '@/app/components/InputsCadastro/InputsCadastro'
+import Link from 'next/link'
 
 
 const poppins = Poppins({
@@ -14,6 +15,7 @@ export default function Page() {
         <main className={`${poppins.className} ${styles.Main}`}>
             <div className={styles.barAlunos}>
                 <h1>CADASTRO</h1>
+                <Link href='/alunos'>Voltar</Link>
             </div>
             <div className={styles.containerInfos}>
                 <div className={styles.containerUserImg}>
@@ -36,18 +38,21 @@ export default function Page() {
                     <InputsCadastro name='Email' length='large' type='email' placeholder='Ex: example@example.com'/>
                     <InputsCadastro name='CPF' length='medium' type='text' placeholder='Ex: 000.000.000-00'/>
                     <InputsCadastro name='Data de Nascimento' type='date' placeholder='00/00/0000'/>
-                    <InputsCadastro name='Sexo' length='small' type='select' />
+                    <InputsCadastro name='Sexo' length='small' type='select' select='sexo' />
                     <InputsCadastro name='Telefone 1' type='tel' placeholder='(00) 000000000'/>
                     <InputsCadastro name='Telefone 2' type='tel' placeholder='(00) 000000000'/>
-                    <InputsCadastro name='Horário' type='select'/>
-                    <InputsCadastro name='Modalidade'type='select'/>
+                    <InputsCadastro name='Horário' type='select' select='horario'/>
+                    <InputsCadastro name='Modalidade'type='select' select='modalidade'/>
                 </div>
             </div>
             <hr></hr>
             <div className={styles.localization}>
-                    <InputsCadastro name='Endereço'type='text' length='biggest' placeholder='Rua exemple, 150' />
-                    <InputsCadastro name='CEP'type='text' placeholder='12345-678'/>
-                    <InputsCadastro name='Bairro'type='text' placeholder='Example'/>
+                    <InputsCadastro name='Endereço'type='text' length='biggest' placeholder='Ex: Rua exemple, 150' />
+                    <InputsCadastro name='CEP'type='text' placeholder='Ex: 12345-678'/>
+                    <InputsCadastro name='Bairro'type='text' placeholder='Ex: Example'/>
+            </div>
+            <div className={styles.nextStep}>
+                <Link href=''>Avançar</Link>
             </div>
         </main>
     )

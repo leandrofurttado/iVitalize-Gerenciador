@@ -1,10 +1,25 @@
+'use client'
+
 import Image from 'next/image'
 
 import styles from './CardAluno.module.css'
 
 import { FaRegTrashCan } from "react-icons/fa6";
 
-export default function CardAluno() {
+
+import { useState } from 'react';
+
+export default function CardAluno({deleteCardAluno}) {
+
+    const [deleteCard, setDeleteCard] = useState(false)
+
+
+    const deletaAluno = () =>{
+        setDeleteCard(true)
+        deleteCardAluno(true)
+    }
+
+
     return (
         <div className={styles.cardContainer}>
             <div className={styles.dataAluno}>
@@ -24,7 +39,7 @@ export default function CardAluno() {
             </div>
             <div className={styles.buttons}>
                 <button className={styles.editButton}>Editar</button>
-                <button className={styles.deleteButton}><FaRegTrashCan /></button>
+                <button className={styles.deleteButton} onClick={deletaAluno}><FaRegTrashCan /></button>
             </div>
         </div>
     )

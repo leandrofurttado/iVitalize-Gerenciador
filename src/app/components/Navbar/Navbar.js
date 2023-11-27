@@ -1,8 +1,6 @@
 'use client'
 
 //imports auth
-import { NextAuthOptions } from '@/app/api/auth/[...nextauth]/route'
-import { getServerSession } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import { motion } from 'framer-motion';
 import styles from './Navbar.module.css'

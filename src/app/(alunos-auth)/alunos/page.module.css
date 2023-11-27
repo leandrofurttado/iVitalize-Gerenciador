@@ -1,18 +1,20 @@
-
-.Main{
+.Main {
     height: 100vh;
+
 }
 
-.barAlunos{
+
+
+.barAlunos {
     height: 150px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 3em;
-    
+
 }
 
-.barAlunos div{
+.barAlunos div {
     width: 350px;
     display: flex;
     height: 48px;
@@ -20,7 +22,7 @@
     align-items: center;
 }
 
-.barAlunos div button{
+.barAlunos div button {
     height: 30px;
     width: 120px;
     border-radius: 5px;
@@ -29,12 +31,17 @@
     transition: .4s;
 }
 
-.barAlunos div button:hover{
+.barAlunos div button:hover {
     background-color: #80d798;
     color: black;
 }
 
-.barAlunos input{
+.barAlunos div button a {
+    text-decoration: none;
+    color: black;
+}
+
+.barAlunos input {
     background-color: rgb(243, 243, 243);
     width: 170px;
     height: 30px;
@@ -44,13 +51,14 @@
     padding-left: 1em;
 }
 
-.barAlunos input:focus{
+.barAlunos input:focus {
     outline: none;
-    border: 1px solid ;
-    border-color: #80d798;;
+    border: 1px solid;
+    border-color: #80d798;
+    ;
 }
 
-.barAlunos div svg{
+.barAlunos div svg {
     position: absolute;
     font-size: 23px;
     cursor: pointer;
@@ -59,21 +67,102 @@
     color: #aaa;
 }
 
-.barAlunos div svg:hover{
+.barAlunos div svg:hover {
     color: #707070;
 }
 
 
-.Main hr{
+.Main hr {
     margin: auto;
     border-bottom: 1px solid #ddd;
     width: 95%;
 }
 
-.cardsAlunos{
+.cardsAlunos {
     display: flex;
     justify-items: center;
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
+}
+
+.deleteCard {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    top: 35%;
+    left: 40%;
+    z-index: 2;
+}
+
+.closeDeleteDiv{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 5px;
+    background-color: transparent;
+}
+
+.closeDeleteDiv svg{
+    color: black;
+    font-size: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.closeDeleteDiv svg:hover{
+    color: red;
+}
+
+.ButtonsDeleteDiv{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ButtonsDeleteDiv button{
+    width: 60px;
+    height: 25px;
+    border-radius: 5px;
+    margin: 0 5px;
+    font-weight: bold;
+}
+
+.deleteBtnAluno{
+    background-color: #80d798;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.deleteBtnAluno:hover{
+    background-color: #90edab;
+}
+
+.CanceldeleteBtnAluno{
+    background-color: #bd1e0c;
+    cursor: pointer;
+    transition: .4s;
+    color: #FFF;
+}
+
+.CanceldeleteBtnAluno:hover{
+    background-color: #e12d19;;
+}
+
+.overlay{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.203);
+    opacity: 0.9;
+    z-index: 1;
+
 }

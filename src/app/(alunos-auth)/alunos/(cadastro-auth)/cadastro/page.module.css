@@ -17,6 +17,22 @@
     
 }
 
+.barAlunos a{
+    height: 30px;
+    width: 65px;
+    padding: 0.2em 0;
+    text-align: center;
+    text-decoration: none;
+    transition: .4s;
+    color: black;
+    border-radius: 10px;
+    background-color: rgb(243, 243, 243);
+}
+
+.barAlunos a:hover{
+    background-color: #80d798;
+}
+
 .containerInfos{
     display: flex;
     height: 250px;
@@ -94,4 +110,29 @@
     align-items: center;
     margin-left: 360px;
    
+}
+
+.nextStep{
+    display: flex;
+    margin-top: 150px;
+    align-items: center;
+    justify-content: end;
+}
+
+.nextStep a{
+    text-decoration: none;
+    color: black;
+    margin-right: 250px;
+    border-radius: 10px;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    padding: 0.2em;
+    background-color: #80d798;
+    transition: .4s;
+}
+
+.nextStep a:hover{
+    background-color: #78f69c;
+    color: #FFF;
 }
