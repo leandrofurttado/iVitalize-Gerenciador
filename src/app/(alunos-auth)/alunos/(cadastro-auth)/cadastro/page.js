@@ -52,7 +52,7 @@ export default function Page() {
                     <InputsCadastro name='Bairro'type='text' placeholder='Ex: Example'/>
             </div>
             <div className={styles.nextStep}>
-                <Link href=''>Avançar</Link>
+                <Link href='/alunos/cadastro/planos'>Avançar</Link>
             </div>
         </main>
     )

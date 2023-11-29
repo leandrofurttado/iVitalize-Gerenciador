@@ -1,0 +1,35 @@
+.Main{
+    height: 100%;
+}
+
+.barPlanos{
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3em;
+}
+
+.barPlanos a{
+    height: 30px;
+    width: 65px;
+    padding: 0.2em 0;
+    text-align: center;
+    text-decoration: none;
+    transition: .4s;
+    color: black;
+    border-radius: 10px;
+    background-color: rgb(243, 243, 243);
+    transition: .4s;
+}
+
+.barPlanos a:hover{
+    background-color: #80d798;
+}
+
+.Main section{
+    padding: 0 300px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}

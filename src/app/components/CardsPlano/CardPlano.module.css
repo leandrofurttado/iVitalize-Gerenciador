@@ -1,0 +1,121 @@
+.cardContainer{
+    width: 350px;
+    height: 450px;
+    border-radius: 15px;
+    box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    margin-right: 70px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 2;
+    
+}
+
+
+.plano{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 2em;
+    background-color: rgba(230, 227, 227, 0.51);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    height: 250px;
+}
+
+.plano h3{
+   font-size: 30px;
+}
+
+.plano h5{
+    margin-bottom: 5px;
+    font-size: 15px;
+    
+}
+.plano h5 svg{
+    font-size: 10px;
+}
+
+.plano h6{
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.plano h2{
+    margin-bottom: 20px;
+}
+
+.plano div{
+    background-color: #336381;
+    border-radius: 5px;
+    color: #FFF;
+}
+
+.modalidades{
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.modalidades .imageModalidade{
+    background-color: #ccc;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+}
+
+.imageModalidade img{
+    width: auto;
+    height: auto;
+}
+
+.modalidadeInfos{
+    display: flex;
+    margin-top: 20px;
+}
+.modalidadeInfos p{
+    font-size: 12px;
+}
+
+.modalidadeInfos h5{
+    font-size: 15px;
+}
+
+.modalidades button{
+    background-color: rgb(106, 194, 131);
+    margin-top: 20px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #FFF;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+
+.modalidades button span{
+    position: relative;
+    z-index: 1;
+}
+
+.modalidades button::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    transition: 0.7s ease-in-out;
+    background-color: #80d798;
+    
+}
+
+.modalidades button:hover::before{
+    width: 100%;
+    height: 100%;
+    background-color: #80d798;
+}

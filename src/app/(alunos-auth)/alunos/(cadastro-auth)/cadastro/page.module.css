@@ -27,6 +27,7 @@
     color: black;
     border-radius: 10px;
     background-color: rgb(243, 243, 243);
+    transition: .4s;
 }
 
 .barAlunos a:hover{

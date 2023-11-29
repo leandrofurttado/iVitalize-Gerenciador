@@ -53,9 +53,7 @@
 
 .barAlunos input:focus {
     outline: none;
-    border: 1px solid;
-    border-color: #80d798;
-    ;
+    border: 1px solid #aaa;
 }
 
 .barAlunos div svg {
