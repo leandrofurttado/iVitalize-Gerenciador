@@ -17,3 +17,62 @@
     background-color: #6ebb84;
     color: #FFFF
 }
+
+@media (max-width:1024px){
+    .Button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 60px;
+        width: 100px;
+        height: 40px;
+        background-color: #80d798;
+        padding: .5em;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: .4s;
+        cursor: pointer;
+        font-size: 15px;
+    }
+    
+}
+
+
+@media (max-width:425px){
+    .Button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+        width: 80px;
+        height: 30px;
+        background-color: #80d798;
+        padding: .5em;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: .4s;
+        cursor: pointer;
+        font-size: 13px;
+    }
+    
+}
+
+
+@media (min-width:2560px){
+    .Button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 60px;
+        width: 200px;
+        height: 60px;
+        background-color: #80d798;
+        padding: .5em;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: .4s;
+        cursor: pointer;
+        font-size: 25px;
+    }
+    
+}

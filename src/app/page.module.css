@@ -5,8 +5,11 @@
   align-items: center;
   justify-content: space-around;
   background-color: rgb(242, 242, 242);
-  padding-inline-start: 200px
+  padding-inline-start: 200px;
+
 }
+
+
 
 
 .Container_Form {
@@ -19,6 +22,7 @@
   height: 650px;
   border-radius: 15px;
   box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.2);
+
 }
 
 .Container_Form div {
@@ -40,4 +44,238 @@
 .Container_Form div img {
   margin-top: 50px;
 
+}
+
+@media (max-width: 1024px){
+  .main_content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(242, 242, 242);
+    padding-inline-start: 50px;
+  
+  }
+
+  .main_content img{
+    width: 380px;
+    height: 200px;
+  }
+
+  .Container_Form{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: #dff5e5;
+    width: 300px;
+    height: 500px;
+    border-radius: 15px;
+    box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .Container_Form div{
+    margin-top: 20px;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .Container_Form div h1{
+    font-size: 20px;
+  }
+
+  .Container_Form div img{
+    height: 100px;
+    width: 100px;
+    margin-top: 25px;
+  }
+
+  .Container_Form .Copyright {
+    height: 100%;
+    flex-direction: column;
+    justify-content: end;
+    margin-bottom: 20px;
+    font-size: 15px;
+  }
+
+}
+
+
+@media (max-width: 768px){
+  .main_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    background-color: rgb(242, 242, 242);
+    padding: 0;
+  
+  }
+
+  .main_content img{
+    width: 380px;
+    height: 200px;
+    margin-top: 10px;
+  }
+
+  .Container_Form{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: #dff5e5;
+    width: 300px;
+    height: 500px;
+    border-radius: 15px;
+    box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .Container_Form div{
+    margin-top: 20px;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .Container_Form div h1{
+    font-size: 20px;
+  }
+
+  .Container_Form div img{
+    height: 100px;
+    width: 100px;
+    margin-top: 25px;
+  }
+
+  .Container_Form .Copyright {
+    height: 100%;
+    flex-direction: column;
+    justify-content: end;
+    margin-bottom: 20px;
+    font-size: 15px;
+  }
+
+}
+
+@media (max-width: 425px){
+  .main_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: 0;
+    background-color: rgb(242, 242, 242);
+
+  }
+
+  .main_content img{
+    width: 300px;
+    height: 150px;
+    margin-top: 10px;
+  }
+
+  .Container_Form{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: #dff5e5;
+    margin-top: 50px;
+    width: 250px;
+    height: 450px;
+    border-radius: 15px;
+    box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .Container_Form div{
+    margin-top: 20px;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .Container_Form div h1{
+    font-size: 15px;
+  }
+
+  .Container_Form div img{
+    height: 100px;
+    width: 100px;
+    margin-top: 25px;
+  }
+
+  .Container_Form .Copyright {
+    height: 100%;
+    flex-direction: column;
+    justify-content: end;
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+
+}
+
+@media (min-width:2560px){
+
+  .main_content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(242, 242, 242);
+    padding-inline-start: 100px;
+  
+  }
+  
+  
+  .Container_Form {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: #dff5e5;
+    width: 700px;
+    height: 950px;
+    border-radius: 25px;
+    box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.2);
+  
+  }
+
+  .main_content img{
+    width: 1000px;
+    height: 650px;
+    margin-top: 10px;
+  }
+  
+  .Container_Form div {
+    margin-top: 50px;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+  }
+
+  .Container_Form div h1{
+    font-size: 70px;
+  }
+  
+  .Container_Form .Copyright {
+    height: 100%;
+    flex-direction: column;
+    justify-content: end;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .Container_Form div img {
+    margin-top: 50px;
+    height: 250px;
+    width: 250px;
+  }
 }

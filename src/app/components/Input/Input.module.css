@@ -29,8 +29,8 @@
     height: 50px;
     border-bottom: 1px solid #333;
     padding-left: 40px;
-    font-size: 16px; 
-    
+    padding-right: 40px;
+    font-size: 16px;  
 }
 
 .backgroundGreen input {
@@ -47,4 +47,139 @@
 .Input_Content input:focus {
     outline: none;
     border-bottom: 1px solid rgb(63, 248, 63)
+}
+
+@media(max-width:1024px){
+    .Input_Content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        position: relative;
+    }
+    .Input_Content label{
+        position: absolute;
+        top: 16px;
+        left: 40px;
+        font-size: 15px;
+    }
+    .LabelPassword{
+        width: 20px;
+        height: 30px;
+        position: relative;
+        top: 20px;
+        margin-left: 210px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .InputDefault {
+        border: none;
+        width: 150px;
+        height: 40px;
+        border-bottom: 1px solid #333;
+        padding-left: 40px;
+        padding-right: 40px;
+        font-size: 16px;  
+    }
+    .backgroundGreen input {
+        border: none;
+        width: 260px;
+        height: 50px;
+        border-bottom: 1px solid #333;
+        background-color: #dff5e5;
+        padding-left: 40px;
+        font-size: 14px; 
+        
+    }
+}
+
+
+
+@media(max-width:425px){
+    .Input_Content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        position: relative;
+    }
+    .Input_Content label{
+        position: absolute;
+        top: 18px;
+        left: 50px;
+        font-size: 13px;
+    }
+    .LabelPassword{
+        width: 20px;
+        height: 30px;
+        position: relative;
+        top: 18px;
+        margin-left: 185px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .InputDefault {
+        border: none;
+        width: 220px;
+        height: 40px;
+        border-bottom: 1px solid #333;
+        padding-left: 30px;
+        padding-right: 30px;
+        font-size: 12px;  
+    }
+    .backgroundGreen input {
+        border: none;
+        width: 220px;
+        height: 50px;
+        border-bottom: 1px solid #333;
+        background-color: #dff5e5;
+        padding-left: 30px;
+        font-size: 12px; 
+        
+    }
+}
+
+
+@media(min-width:2560px){
+    .Input_Content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 600px;
+        position: relative;
+    }
+    .Input_Content label{
+        position: absolute;
+        top: 6px;
+        left: 10px;
+        font-size: 30px;
+    }
+    .LabelPassword{
+        width: 20px;
+        height: 30px;
+        position: relative;
+        top: 20px;
+        margin-left: 530px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .InputDefault {
+        border: none;
+        width: 150px;
+        height: 40px;
+        border-bottom: 1px solid #333;
+        padding-left: 40px;
+        padding-right: 70px;
+        font-size: 16px;  
+    }
+    .backgroundGreen input {
+        border: none;
+        width: 600px;
+        height: 50px;
+        border-bottom: 1px solid #333;
+        background-color: #dff5e5;
+        padding-left: 55px;
+        font-size: 25px; 
+        
+    }
 }
