@@ -14,7 +14,7 @@ const IconComponent = ({ iconName }) => {
 };
 
 
-export default function Input({ type, name, placeholder, icon, BackgroundInput, showPass, onChange }) {
+export default function Input({ type, name, placeholder, icon, BackgroundInput, showPass, onChange, handleEnterKey }) {
 
     const [showPassword, setShowPassword] = useState(false)
 
@@ -22,19 +22,28 @@ export default function Input({ type, name, placeholder, icon, BackgroundInput, 
         setShowPassword(!showPassword);
     }
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handleEnterKey()
+          
+        }
+      };
+
     return (
         <div className={`${styles.Input_Content} ${styles[`${BackgroundInput}`]}`}>
             <label> <IconComponent iconName={icon} /></label>
             {type === 'email' && (
-                <input required onChange={onChange} type={type} placeholder={placeholder} className={styles.InputDefault} />
+                <input required onChange={onChange} type={type} placeholder={placeholder} className={styles.InputDefault} onKeyDown={handleKeyPress} />
             )}
 
             {showPass && (
                 <>
-                    <label className={styles.LabelPassword} onClick={ToggleShowPassword} ><IconComponent iconName={!showPassword ? 'FaEyeSlash' : 'FaEye'} /> </label>
-                    <input required onChange={onChange} type={!showPassword ? type : 'text'} placeholder={placeholder} className={styles.InputDefault} />
+                    <label className={styles.LabelPassword} onClick={ToggleShowPassword} ><IconComponent iconName={!showPassword ? 'FaEye' : 'FaEyeSlash'} /> </label>
+                    <input required onChange={onChange} type={!showPassword ? type : 'text'} placeholder={placeholder} className={styles.InputDefault} onKeyDown={handleKeyPress} />
                 </>
             )}
         </div>
     );
 }
+

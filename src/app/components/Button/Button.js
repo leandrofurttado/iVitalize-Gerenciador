@@ -9,11 +9,12 @@ const poppins = Poppins({
 
 
 
-export default function Button({ name, type, onClick, refresh }) {
+export default function Button({ name, type, functionClick, refresh }) {
+
 
     return (
         <div className={poppins.className}>
-            <button onClick={onClick} className={`${styles.Button} ${poppins.className}`} type={type}>
+            <button onClick={functionClick}  className={`${styles.Button} ${poppins.className}`} type={type}>
                 {refresh ? <LoadingLogin /> : name}
             </button>
         </div>

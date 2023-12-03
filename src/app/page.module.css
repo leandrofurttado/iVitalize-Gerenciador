@@ -184,7 +184,7 @@
     justify-content: start;
     align-items: center;
     background-color: #dff5e5;
-    margin-top: 50px;
+    margin-top: 10px;
     width: 250px;
     height: 450px;
     border-radius: 15px;
@@ -192,7 +192,7 @@
   }
 
   .Container_Form div{
-    margin-top: 20px;
+    margin-top: 10px;
     top: 20px;
     display: flex;
     flex-direction: column;
@@ -207,7 +207,7 @@
   .Container_Form div img{
     height: 100px;
     width: 100px;
-    margin-top: 25px;
+    margin-top: 1px;
   }
 
   .Container_Form .Copyright {

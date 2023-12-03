@@ -8,7 +8,7 @@
 
 .Input_Content label{
     position: absolute;
-    top: 14px;
+    top: 12.5px;
     left: 40px;
     font-size: 20px;
 }
@@ -17,7 +17,7 @@
     width: 20px;
     height: 30px;
     position: relative;
-    top: 14px;
+    top: 12.5px;
     margin-left: 300px;
     font-size: 20px;
     cursor: pointer;
@@ -59,7 +59,7 @@
     }
     .Input_Content label{
         position: absolute;
-        top: 16px;
+        top: 15.5px;
         left: 40px;
         font-size: 15px;
     }
@@ -67,7 +67,7 @@
         width: 20px;
         height: 30px;
         position: relative;
-        top: 20px;
+        top: 15.5px;
         margin-left: 210px;
         font-size: 20px;
         cursor: pointer;
@@ -105,7 +105,7 @@
     }
     .Input_Content label{
         position: absolute;
-        top: 18px;
+        top: 17px;
         left: 50px;
         font-size: 13px;
     }
@@ -113,7 +113,7 @@
         width: 20px;
         height: 30px;
         position: relative;
-        top: 18px;
+        top: 17px;
         margin-left: 185px;
         font-size: 20px;
         cursor: pointer;
