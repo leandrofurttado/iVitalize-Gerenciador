@@ -19,6 +19,7 @@ export default function Page() {
                 <CardsHome icon={'FaUsers'} name='ALUNOS CADASTRADOS ATIVOS' value='2567' />
                 <CardsHome icon={'FaUserPlus'} name='MATRÍCULAS REALIZADAS' value='3127' />
                 <CardsHome icon={'FaUserMinus'} name='MATRÍCULAS CANCELADAS' value='560' />
+                
             </section>
 
         </main>

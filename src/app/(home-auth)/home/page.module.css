@@ -8,3 +8,13 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
+
+@media (max-width: 425px){
+    .cardSection{
+        height: 400px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

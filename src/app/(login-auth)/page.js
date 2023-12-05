@@ -113,7 +113,7 @@ export default function Login() {
             alt="IconIvitalizer" />
         </div>
         <form >
-          <Input onChange={(e) => { setEmail(e.target.value) }} handleEnterKey={handleEnterKey} type='email' name='email' placeholder='Digite seu email' BackgroundInput='backgroundGreen' icon='FaEnvelope' />
+          <Input onChange={(e) => { setEmail(e.target.value) }} handleEnterKey={handleEnterKey} type='email' name='email' placeholder='Digite seu email'BackgroundInput='backgroundGreen' icon='FaEnvelope' />
           <Input onChange={(e) => { setPassword(e.target.value) }} handleEnterKey={handleEnterKey} type='password' name='Senha' placeholder='Digite sua senha' BackgroundInput='backgroundGreen' icon='FaLock' showPass={'true'} />
         </form>
         <Button functionClick={handleSubmit}   className={styles.Button} name='Entrar' type='submit' refresh={refresh ? true : false} />

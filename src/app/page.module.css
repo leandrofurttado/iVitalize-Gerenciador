@@ -239,7 +239,7 @@
     align-items: center;
     background-color: #dff5e5;
     width: 700px;
-    height: 950px;
+    height: 1100px;
     border-radius: 25px;
     box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.2);
   
@@ -248,7 +248,7 @@
   .main_content img{
     width: 1000px;
     height: 650px;
-    margin-top: 10px;
+    margin-top: 30px;
   }
   
   .Container_Form div {
@@ -274,7 +274,7 @@
   }
   
   .Container_Form div img {
-    margin-top: 50px;
+    margin-top: 70px;
     height: 250px;
     width: 250px;
   }

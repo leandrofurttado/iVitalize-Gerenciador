@@ -41,8 +41,8 @@
 
 .modalUser {
     position: absolute;
-    top: 11%;
-    right: 20px;
+    top: 8.5%;
+    right: 50px;
     width: 8%;
     height: 10%;
     background-color: #fff;
@@ -112,5 +112,340 @@
     width: 100%;
 }
 
+@media(max-width:1440px){
+    .modalUser {
+        position: absolute;
+        top: 9%;
+        right: 40px;
+        width: 10%;
+        height: 10%;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        border-bottom-left-radius: 15%;
+        border-bottom-right-radius: 15%;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    
+      
+      }
+    
+      
+    .modalUser button{
+        height: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px
+    }
+}
+
+@media(max-width: 1024px){
+    .RedirectBar li a{
+        text-decoration: none;
+        color: black;
+        position: relative;
+        font-size: .8em;
+    }
+
+    .imageUser {
+        position: absolute;
+        right: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        background-color: transparent;
+        cursor: pointer;
+    
+    }
+
+    
+.imageUser img{
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+}
+
+.aboveBar img {
+    margin: auto;
+    width: 250px;
+    height: 35px;
+}
+
+.modalUser {
+    position: absolute;
+    top: 8.5%;
+    right: 50px;
+    width: 10%;
+    height: 9%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 15%;
+    border-bottom-right-radius: 15%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+  
+  }
+
+  
+.modalUser button{
+    height: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px
+}
+
+}
+
+
+
+@media(max-width: 768px){
+    .RedirectBar li a{
+        text-decoration: none;
+        color: black;
+        position: relative;
+        font-size: .7em;
+    }
+
+    .imageUser {
+        position: absolute;
+        right: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        background-color: transparent;
+        cursor: pointer;
+    
+    }
+
+    
+.imageUser img{
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+}
+
+.aboveBar img {
+    margin: auto;
+    width: 225px;
+    height: 28px;
+}
+
+.modalUser {
+    position: absolute;
+    top: 7.8%;
+    right: 50px;
+    width: 10%;
+    height: 8%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 15%;
+    border-bottom-right-radius: 15%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+  
+  }
+
+  
+.modalUser button{
+    height: 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 10px
+}
+
+}
+
+
+@media(max-width: 425px){
+    .RedirectBar li a{
+        text-decoration: none;
+        color: black;
+        position: relative;
+        font-size: .6em;
+    }
+
+    .imageUser {
+        position: absolute;
+        right: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        background-color: transparent;
+        cursor: pointer;
+    
+    }
+
+    
+.imageUser img{
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+}
+
+.aboveBar img {
+    margin: auto;
+    width: 175px;
+    height: 20px;
+}
+
+.modalUser {
+    position: absolute;
+    top: 7.3%;
+    right: 20px;
+    width: 15%;
+    height: 6%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 15%;
+    border-bottom-right-radius: 15%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+  
+  }
+
+  
+.modalUser button{
+    margin-top: 1px;
+    height: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 10px
+}
+
+}
+
+@media (min-width:2560px){
+
+    .aboveBar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 150px;
+        background-color: #80d798;
+    }
+    
+    .aboveBar img {
+        margin: auto;
+        width: 425px;
+        height: 80px;
+    }
+    
+    .imageUser {
+        position: absolute;
+        right: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        border-radius: 100%;
+        background-color: #e0dfdf;
+        cursor: pointer;
+    
+    }
+    
+    
+    .imageUser img{
+        border-radius: 100%;
+        width: 100px;
+        height: 100px;
+    }
+    
+    
+    .modalUser {
+        position: absolute;
+        top: 8.3%;
+        right: 100px;
+        width: 9%;
+        height: 10%;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        border-bottom-left-radius: 15%;
+        border-bottom-right-radius: 15%;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    
+      
+      }
+    
+      
+    .modalUser button{
+        height: 30px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 22px;
+    }
+    
+    .modalUser button:hover{
+        background-color: #80d798;
+    }
+    
+    .modalUser .exit:hover{
+        background-color: rgb(186, 0, 12);
+        color: white;
+    }
+    
+    .RedirectBar {
+        display: flex;
+        list-style: none;
+        justify-content: center;
+        align-items: center;
+        background-color: #f3f3f3;
+        width: 100%;
+        height: 80px;
+        
+    }
+    
+    .RedirectBar li {
+        margin: 0 10px;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+    }
+    
+    .RedirectBar li a{
+        text-decoration: none;
+        color: black;
+        position: relative;
+        font-size: 1.7em;
+    }
+    
+    .RedirectBar li a::after{
+        content: ' ';
+        width: 0%;
+        height: 6px;
+        background-color: #80d798;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transition: 0.5s ease-in-out;
+    }
+    
+}
 
 
