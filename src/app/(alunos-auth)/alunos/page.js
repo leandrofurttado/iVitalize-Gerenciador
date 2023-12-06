@@ -31,9 +31,10 @@ export default function Page() {
         setDeleteCard(false)
     }
 
+
     return (
-        <main className={`${poppins.className} ${styles.Main} ${deleteCard ? styles.overlay : ''}`}>
-            <Navbar />
+        <main className={`${poppins.className} ${styles.Main} ${deleteCard ? styles.overlay : ''}`} >
+            <Navbar/>
             <div className={styles.barAlunos}>
                 <h1>ALUNOS</h1>
                 <div>

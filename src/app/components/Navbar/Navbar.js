@@ -38,9 +38,14 @@ export default function Navbar() {
         //Quando mouse estiver por cima, ativa o modal
         setClickImg(!clickImg)
         
+        
     }
 
 
+    function closeTab(){
+            setClickImg(false)
+        
+    }
 
 
 
@@ -79,7 +84,7 @@ export default function Navbar() {
 
 
             </div>
-            <ul className={styles.RedirectBar}>
+            <ul className={styles.RedirectBar} onMouseDown={closeTab}>
                 <li>
                     <Link href='/home'> HOME</Link>
                 </li>

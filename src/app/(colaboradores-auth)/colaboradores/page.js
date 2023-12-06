@@ -1,3 +1,4 @@
+'use client'
 import Navbar from "@/app/components/Navbar/Navbar";
 
 import { Poppins } from 'next/font/google'
@@ -8,6 +9,8 @@ const poppins = Poppins({
   })
 
 export default function Page(){
+
+
     return (
         <main className={poppins.className}>
             <Navbar/>

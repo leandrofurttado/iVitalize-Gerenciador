@@ -1,3 +1,4 @@
+'use client'
 import CardsHome from "@/app/components/CardsHome/CardsHome";
 import Navbar from "@/app/components/Navbar/Navbar";
 
@@ -12,8 +13,11 @@ const poppins = Poppins({
 })
 
 export default function Page() {
+
+
+
     return (
-        <main className={`${poppins.className} ${styles.Main}`}>
+        <main className={`${poppins.className} ${styles.Main}`} >
              <Navbar/>
             <section className={styles.cardSection}>
                 <CardsHome icon={'FaUsers'} name='ALUNOS CADASTRADOS ATIVOS' value='2567' />

@@ -1,4 +1,4 @@
-.Button{
+.Button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,13 +13,13 @@
     cursor: pointer;
 }
 
-.Button:hover{
+.Button:hover {
     background-color: #6ebb84;
     color: #FFFF
 }
 
-@media (max-width:1024px){
-    .Button{
+@media (max-width:1024px) {
+    .Button {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -34,16 +34,16 @@
         cursor: pointer;
         font-size: 15px;
     }
-    
+
 }
 
 
-@media (max-width:425px){
-    .Button{
+@media (max-width:425px) {
+    .Button {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 40px;
+        margin-top: 60px;
         width: 80px;
         height: 30px;
         background-color: #80d798;
@@ -54,12 +54,13 @@
         cursor: pointer;
         font-size: 13px;
     }
-    
+
+
 }
 
 
-@media (min-width:2560px){
-    .Button{
+@media (min-width:2560px) {
+    .Button {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -74,5 +75,5 @@
         cursor: pointer;
         font-size: 25px;
     }
-    
+
 }

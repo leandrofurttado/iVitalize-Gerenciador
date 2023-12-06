@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 0;
     
 }
 
@@ -30,6 +31,7 @@
     border-radius: 100%;
     background-color: #e0dfdf;
     cursor: pointer;
+    z-index: 1;
 
 }
 
