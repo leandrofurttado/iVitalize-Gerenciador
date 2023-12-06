@@ -77,6 +77,8 @@ export default function Login() {
       redirect: false
     })
 
+
+
     if (result.error) {
       console.log(result)
       setRefresh(false);

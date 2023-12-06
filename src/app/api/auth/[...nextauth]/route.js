@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth from "next-auth";
 //Como é email e senha, tem que chamar o credentialsProviders
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -11,17 +11,16 @@ const nextAuthOptions = {
     providers: [
         //Tipo de providers da API, No caso Email e Senha
         CredentialsProvider({
-            name:'credentials',
-            credentials:{
-                email:{label: 'email', type: 'email'},
-                password:{label:'password', type:'password'}
+            name: 'credentials',
+            credentials: {
+                email: { label: 'email', type: 'email' },
+                password: { label: 'password', type: 'password' }
             },
             //Autorização chamada da API
-            async authorize(credentials, req){
-                const response = await fetch('https://ivitalize.000webhostapp.com/usuarios/login', {
+            async authorize(credentials, req) {
+                const response = await fetch('https://ivitalize-api.onrender.com/api/v1/users/login', {
                     method: 'POST',
-                    headers:{
-                        'authorization': `Bearer ${token}`,
+                    headers: {
                         'Content-type': 'application/json'
                     },
                     body: JSON.stringify({
@@ -30,16 +29,16 @@ const nextAuthOptions = {
                         password: credentials.password
                     })
                 })
-                //Resposta da chamada
-                const user = await response.json()
-                
 
-                if (user.tipo == 'sucesso' && response.ok){
-                    console.log(user.status)
-                    return user
+                const data = await response.json();
+
+                if (response.ok && !data.error) {
+                    return data
                 }
-                console.log(user)
+
+
                 return null
+
 
             }
         })
