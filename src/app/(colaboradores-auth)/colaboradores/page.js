@@ -1,7 +1,7 @@
 'use client'
 import Navbar from "@/app/components/Navbar/Navbar";
 
-import { Poppins } from 'next/font/google'
+import { Poppins } from 'next/font/google';
 
 import { useSession } from 'next-auth/react';
 

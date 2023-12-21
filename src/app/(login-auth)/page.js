@@ -77,14 +77,19 @@ export default function Login() {
       redirect: false
     })
 
-
+    console.log("Esse é o result", result)
 
     if (result.error) {
-      console.log(result)
       setRefresh(false);
       toast.error('Credenciais incorretas!')
       return
+    }else if(result==0){
+      setRefresh(false);
+      toast.error('Ocorreu um erro, tente novamente mais tarde!')
+      return
     }
+
+
 
     //Deleta o historico para home, então o voltar n jogara mais para o login
     router.replace('/home')

@@ -18,6 +18,7 @@ const inter = Poppins({
 
 
 export default async function RootLayout({ children }) {
+  //depois verificar mas n precisa
   const session = await getServerSession(nextAuthOptions)
 
   return (

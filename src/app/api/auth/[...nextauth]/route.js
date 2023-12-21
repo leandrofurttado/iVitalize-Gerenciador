@@ -1,57 +1,60 @@
 import NextAuth from "next-auth";
-//Como é email e senha, tem que chamar o credentialsProviders
 import CredentialsProvider from "next-auth/providers/credentials";
 
-require('dotenv').config();
+const token = process.env.API_TOKEN;
 
-const token = process.env.API_TOKEN
+const TIMEOUT_DURATION = 5000; // Defina o tempo limite desejado em milissegundos (aqui é 5 segundos)
 
-//Lidando com as credenciais da API
 const nextAuthOptions = {
-    providers: [
-        //Tipo de providers da API, No caso Email e Senha
-        CredentialsProvider({
-            name: 'credentials',
-            credentials: {
-                email: { label: 'email', type: 'email' },
-                password: { label: 'password', type: 'password' }
-            },
-            //Autorização chamada da API
-            async authorize(credentials, req) {
-                const response = await fetch('https://ivitalize-api.onrender.com/api/v1/users/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        //Envia pro back analisar pelos campos email e senha criados pelo back-end
-                        email: credentials.email,
-                        password: credentials.password
-                    })
-                })
+  providers: [
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {
+        email: { label: "email", type: "email" },
+        password: { label: "password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        try {
+          const response = await Promise.race([
+            fetch("https://ivitalize-api.onrender.com/api/v1/users/login", {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify({
+                email: credentials.email,
+                password: credentials.password,
+              }),
+            }),
+            new Promise((_, reject) =>
+              setTimeout(() => reject(new Error("Timeout")), TIMEOUT_DURATION)
+            ),
+          ]);
 
-                const data = await response.json();
+          if (response instanceof Error && response.message === "Timeout") {
+            console.error("API request timed out");
+            return 0; // Retorna 0 em caso de timeout
+          }
 
-                if (response.ok && !data.error) {
-                    return data
-                }
+          const data = await response.json();
 
+          if (response.ok && !data.error) {
+            // Retorna data se response.ok for true e data.error for false
+            return data;
+          }
+        } catch (error) {
+          console.error("Error during authorization:", error);
+          // Retorna 0 se ocorrer um erro durante o processo
+          return false;
+        }
+      },
+    }),
+  ],
+  pages: {
+    signIn: "/",
+  },
+};
 
-                return null
+const handler = NextAuth(nextAuthOptions);
 
-
-            }
-        })
-    ],
-    //Ignora as paginas pre prontas do next auth, então assim o login fica definido para a pagina /
-    pages: {
-        signIn: '/',
-    }
-}
-
-//Usa o nextauthconfirado no handler
-const handler = NextAuth(nextAuthOptions)
-
-
-//exporta o nextauthoptions para ser usado nas pages
-export { handler as GET, handler as POST, nextAuthOptions }
+export { handler as GET, handler as POST, nextAuthOptions };
