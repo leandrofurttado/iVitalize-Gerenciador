@@ -77,13 +77,13 @@ export default function Login() {
       redirect: false
     })
 
-    console.log("Esse é o result", result)
+    
 
-    if (result.error) {
+    if (result === false) {
       setRefresh(false);
       toast.error('Credenciais incorretas!')
       return
-    }else if(result==0){
+    }else if(result.error){
       setRefresh(false);
       toast.error('Ocorreu um erro, tente novamente mais tarde!')
       return

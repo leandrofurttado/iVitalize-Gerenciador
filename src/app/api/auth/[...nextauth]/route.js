@@ -41,11 +41,13 @@ const nextAuthOptions = {
           if (response.ok && !data.error) {
             // Retorna data se response.ok for true e data.error for false
             return data;
+          }else{
+            return false
           }
         } catch (error) {
           console.error("Error during authorization:", error);
           // Retorna 0 se ocorrer um erro durante o processo
-          return false;
+          return null;
         }
       },
     }),
