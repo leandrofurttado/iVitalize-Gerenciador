@@ -27,7 +27,7 @@ export default function Input({ type, name, placeholder, icon, BackgroundInput, 
           e.preventDefault();
           handleEnterKey()
           
-        }
+        }  
       };
 
     return (

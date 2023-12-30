@@ -75,17 +75,18 @@ export default function Login() {
       password,
       //Coloca false pois se não ele redireciona para uma pagina ja criada do nextAuth, como quero controlar coloco false
       redirect: false
+      
     })
 
-    
+    console.log('Ola', result)
 
-    if (result === false) {
-      setRefresh(false);
-      toast.error('Credenciais incorretas!')
-      return
-    }else if(result.error){
-      setRefresh(false);
-      toast.error('Ocorreu um erro, tente novamente mais tarde!')
+    if (result.error) {
+        if(result.status=== 401){
+          setRefresh(false);
+          toast.error('Credenciais incorretas')
+          return
+        }
+        toast.error('Ocorreu algum erro, tente novamente mais tarde!')
       return
     }
 
@@ -96,7 +97,7 @@ export default function Login() {
     toast.success('Login realizado com sucesso!')
   }
 
-
+  
 
   return (
 
