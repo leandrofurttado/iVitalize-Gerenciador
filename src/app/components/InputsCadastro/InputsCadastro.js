@@ -1,31 +1,34 @@
 import styles from './InputsCadastro.module.css'
 
-export default function InputsCadastro({ name, length, placeholder, type, select }) {
+export default function InputsCadastro({ name, length, placeholder, type, select, value, onChange }) {
     return (
         <div className={`${styles.inputConfig}`}>
             <label>{name}</label>
             {!select && (
-                <input className={`${styles.input} ${styles['input_' + length]}`} type={type} placeholder={placeholder}></input>
+                <input className={`${styles.input} ${styles['input_' + length]}`} type={type} placeholder={placeholder} value={value} onChange={onChange}></input>
             )}
             {select == 'sexo' && (
-                <select className={`${styles.input} ${styles['input_' + length]}`}>
-                    <option>Masculino</option>
-                    <option>Feminino</option>
-                    <option>Outro</option>
+                <select className={`${styles.input} ${styles['input_' + length]}`} value={value} onChange={onChange}>
+                    <option value={'male'} >Masculino</option>
+                    <option value={'female'} >Feminino</option>
+                    <option value={'other'}>Outro</option>
                 </select>
             )}
             {select == 'horario' && (
-                <select className={`${styles.input} ${styles['input_' + length]}`}>
-                    <option>Manhã</option>
-                    <option>Tarde</option>
-                    <option>Noite</option>
+                <select className={`${styles.input} ${styles['input_' + length]}`} value={value} onChange={onChange}>
+                    <option value={0}>Manhã</option>
+                    <option value={1}>Tarde</option>
+                    <option value={2}>Noite</option>
                 </select>
             )}
             {select == 'modalidade' && (
-                <select className={`${styles.input} ${styles['input_' + length]}`}>
-                    <option>Musculação</option>
-                    <option>Crossfit</option>
-                    <option>Luta</option>
+                <select className={`${styles.input} ${styles['input_' + length]}`} value={value} onChange={onChange}>
+                    <option value={0}>Musculação</option>
+                    <option value={1}>Crossfit</option>
+                    <option value={2}>Luta</option>
+                    <option value={3}>Dança</option>
+                    <option value={4}>Pilates</option>
+                    <option value={5}>Outros</option>
                 </select>
             )}
 

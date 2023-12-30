@@ -13,6 +13,10 @@ import { motion } from 'framer-motion';
 
 import { useState } from "react";
 
+import { usePathname } from "next/navigation";
+
+import { useAppState } from "@/app/Context/AppState";
+
 import CardAluno from "@/app/components/CardAluno/CardAluno";
 const poppins = Poppins({
     subsets: ['latin'],
@@ -20,6 +24,12 @@ const poppins = Poppins({
 })
 
 export default function Page() {
+    const { formData, setFormData } = useAppState();
+    const pathRoute = usePathname();
+
+    if(pathRoute === '/alunos') {
+        setFormData('')
+    }
 
     const [deleteCard, setDeleteCard] = useState(false)
 

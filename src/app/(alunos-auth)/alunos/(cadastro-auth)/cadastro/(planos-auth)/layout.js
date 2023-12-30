@@ -12,10 +12,12 @@ export const metadata = {
 
 export default async function Privatelayout({children}){
     const session = await getServerSession(nextAuthOptions)
+  
 
     if (!session){
         redirect('/')
     } 
+
 
     return <>{children}</>
 

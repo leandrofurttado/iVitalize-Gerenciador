@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 import { motion } from 'framer-motion';
 
-export default function CardPlano({ }) {
+export default function CardPlano({ onClick}) {
 
 
     return (
@@ -47,7 +47,7 @@ export default function CardPlano({ }) {
                             <p>Todo dia</p>
                         </div>
                     </div>
-                    <button>
+                    <button onClick={onClick}>
                         <span>MATRICULAR</span>
                     </button>
                 </div>
