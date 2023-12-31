@@ -4,7 +4,8 @@ import styles from './page.module.css'
 import Image from 'next/image'
 import InputsCadastro from '@/app/components/InputsCadastro/InputsCadastro'
 import Link from 'next/link'
-import { useAppState  } from '@/app/Context/AppState'
+import { useContext } from 'react'
+import {CadastroContext} from '@/app/Context/CadastroState'
 
 
 const poppins = Poppins({
@@ -14,7 +15,7 @@ const poppins = Poppins({
 
 export default function Page() {
 
-    const { formData, setFormData } = useAppState();
+    const {formData, setFormData} = useContext(CadastroContext)
 
     const handleInputChange = (name, value) => {
       setFormData((prevFormData) => ({

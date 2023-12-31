@@ -11,11 +11,11 @@ import { FaXmark } from "react-icons/fa6";
 
 import { motion } from 'framer-motion';
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import { usePathname } from "next/navigation";
 
-import { useAppState } from "@/app/Context/AppState";
+import {CadastroContext} from '@/app/Context/CadastroState'
 
 import CardAluno from "@/app/components/CardAluno/CardAluno";
 const poppins = Poppins({
@@ -24,7 +24,9 @@ const poppins = Poppins({
 })
 
 export default function Page() {
-    const { formData, setFormData } = useAppState();
+
+    const {setFormData} = useContext(CadastroContext)
+
     const pathRoute = usePathname();
 
     if(pathRoute === '/alunos') {

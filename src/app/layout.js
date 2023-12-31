@@ -8,7 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
-import { AppStateProvider } from './Context/AppState';
+
+import { CadastroProvider } from './Context/CadastroState';
 
 
 
@@ -40,9 +41,9 @@ export default async function RootLayout({ children }) {
           theme="light"
         />
         <NextAuthSessionProvider>
-          <AppStateProvider>
+          <CadastroProvider>
             {children}
-          </AppStateProvider>
+          </CadastroProvider>
         </NextAuthSessionProvider>
       </body>
     </html>

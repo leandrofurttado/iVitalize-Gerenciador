@@ -48,12 +48,12 @@ export default function Login() {
       redirect: false
     })
 
-    if (result.error) {
-      console.log(result)
+    if(result.error){
       setRefresh(false);
-      toast.error('Credenciais incorretas!')
+      toast.error('Credenciais Incorretas!')
       return
     }
+
 
     //Deleta o historico para home, então o voltar n jogara mais para o login
     router.replace('/home')
@@ -78,18 +78,16 @@ export default function Login() {
       
     })
 
-    console.log('Ola', result)
+console.log(result)
 
-    if (result.error) {
-        if(result.status=== 401){
-          setRefresh(false);
-          toast.error('Credenciais incorretas')
-          return
-        }
-        toast.error('Ocorreu algum erro, tente novamente mais tarde!')
+
+    if(result.error){
+      setRefresh(false);
+      toast.error('Credenciais Incorretas!')
       return
     }
 
+  
 
 
     //Deleta o historico para home, então o voltar n jogara mais para o login

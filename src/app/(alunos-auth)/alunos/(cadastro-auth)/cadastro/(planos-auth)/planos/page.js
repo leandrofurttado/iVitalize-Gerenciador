@@ -3,9 +3,10 @@ import { Poppins } from 'next/font/google'
 import styles from './page.module.css'
 import Link from 'next/link'
 import CardPlano from '@/app/components/CardsPlano/CardPlano'
-import { useAppState } from '@/app/Context/AppState'
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { toast } from 'react-toastify';
+import { useContext } from 'react'
+import {CadastroContext} from '@/app/Context/CadastroState'
 
 
 const poppins = Poppins({
@@ -15,14 +16,16 @@ const poppins = Poppins({
 
 export default function Page() {
     const router = useRouter()
-    const { formData } = useAppState();
+    const pathRoute = usePathname()
+    const {formData} = useContext(CadastroContext)
 
-  
-    if(!formData){
-        router.push('/alunos/cadastro')
-        toast.error('Os dados  não estão preenchidos')
-        return
-    }
+  if(!formData){
+        if(pathRoute === '/alunos/cadastro/planos'){
+            router.push('/alunos/cadastro')
+        }
+        
+  }
+ 
 
   
     async function createStudent(){
@@ -54,9 +57,9 @@ export default function Page() {
 
               const data = await response.json();
 
-              if(data){
+              if(response.ok){
                 console.log('User criado')
-                return
+                return data
               }
 
         }catch(e){
@@ -66,7 +69,7 @@ export default function Page() {
         }
     }
   
-    console.log(formData)
+
     return (
         <main className={`${poppins.className} ${styles.Main}`}>
             <div className={styles.barPlanos}>
