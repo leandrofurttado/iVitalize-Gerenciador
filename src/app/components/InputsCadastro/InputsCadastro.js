@@ -1,5 +1,7 @@
 import styles from './InputsCadastro.module.css'
 
+
+
 export default function InputsCadastro({ name, length, placeholder, type, select, value, onChange }) {
     return (
         <div className={`${styles.inputConfig}`}>

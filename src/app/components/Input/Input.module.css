@@ -6,6 +6,17 @@
     position: relative;
 }
 
+
+/* Cor de fundo do autocomplete */
+.Input_Content input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #dff5e5 inset;
+}
+
+/* Cor do texto do autocomplete */
+.Input_Content input:-webkit-autofill {
+    -webkit-text-fill-color:  black !important;
+}
+
 .Input_Content label{
     position: absolute;
     top: 12.5px;

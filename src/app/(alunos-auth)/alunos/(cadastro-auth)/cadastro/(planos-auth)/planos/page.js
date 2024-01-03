@@ -3,10 +3,12 @@ import { Poppins } from 'next/font/google'
 import styles from './page.module.css'
 import Link from 'next/link'
 import CardPlano from '@/app/components/CardsPlano/CardPlano'
-import { usePathname, useRouter } from "next/navigation"
+import {useRouter, usePathname, redirect } from "next/navigation"
 import { toast } from 'react-toastify';
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import {CadastroContext} from '@/app/Context/CadastroState'
+
+
 
 
 const poppins = Poppins({
@@ -16,16 +18,14 @@ const poppins = Poppins({
 
 export default function Page() {
     const router = useRouter()
-    const pathRoute = usePathname()
+    const pathName = usePathname()
     const {formData} = useContext(CadastroContext)
 
-  if(!formData){
-        if(pathRoute === '/alunos/cadastro/planos'){
-            router.push('/alunos/cadastro')
-        }
-        
-  }
- 
+
+    if((formData === '' || !formData) && pathName === '/alunos/cadastro/planos'){
+        return redirect('/alunos/cadastro');
+    }
+
 
   
     async function createStudent(){
@@ -58,14 +58,15 @@ export default function Page() {
               const data = await response.json();
 
               if(response.ok){
-                console.log('User criado')
+                router.replace('/alunos')
+                toast.success('Aluno cadastrado com sucesso!')
                 return data
               }
 
         }catch(e){
             console.error(e)
-            console.log('Erro no cadastro')
-            console.log(parseInt(formData.schedule))
+            toast.error('Erro no cadastro, tente novamente!')
+            router.replace('/alunos')
         }
     }
   

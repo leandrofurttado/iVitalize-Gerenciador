@@ -120,7 +120,7 @@
     justify-content: end;
 }
 
-.nextStep a{
+.nextStep button{
     text-decoration: none;
     color: black;
     margin-right: 250px;
@@ -130,10 +130,13 @@
     text-align: center;
     padding: 0.2em;
     background-color: #80d798;
+    cursor: pointer;
     transition: .4s;
+    font-size: 15px;
+    font-weight: bold;
 }
 
-.nextStep a:hover{
+.nextStep button:hover{
     background-color: #78f69c;
     color: #FFF;
 }
