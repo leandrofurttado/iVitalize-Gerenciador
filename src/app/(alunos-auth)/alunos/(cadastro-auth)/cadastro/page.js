@@ -19,6 +19,7 @@ export default function Page() {
     const { formData, setFormData } = useContext(CadastroContext)
     const [bairroCep, setBairroCEP] = useState('')
     const [ruaCep, setRuaCep] = useState('')
+    const [isValid, setIsValid] = useState(false)
     const router = useRouter()
 
 
@@ -35,7 +36,10 @@ export default function Page() {
             setFormData((prevFormData) => ({
                 ...prevFormData,
                 [name]: value,
+
+
             }));
+            
         }
     };
 
@@ -184,6 +188,22 @@ export default function Page() {
    
   }
 
+  function validateInput(field, value) {
+    if (value === '' || !value) {
+      return false;
+    }
+  
+    if (field === 'neighborhood') {
+      // Adapte a lógica de validação para o campo 'Bairro'
+      // Neste exemplo, estou apenas verificando se o comprimento é maior que 3
+      return value.length > 3;
+    }
+  
+    // Adicione mais lógica de validação para outros campos conforme necessário
+  
+    return true;
+  }
+
     return (
         <main className={`${poppins.className} ${styles.Main}`}>
             <div className={styles.barAlunos}>
@@ -222,7 +242,7 @@ export default function Page() {
             <div className={styles.localization}>
                 <InputsCadastro name='Endereco' type='text' length='biggest' placeholder='Ex: Rua exemple, 150' value={ruaCep} onChange={(e) => handleInputChange('adress', e.target.value)} />
                 <InputsCadastro name='CEP' type='text' placeholder='Ex: 12345-678' value={formData['cep']} onChange={(e) => completeCEP('cep', e.target.value)} />
-                <InputsCadastro name='Bairro' type='text' placeholder='Ex: Example' value={bairroCep} onChange={(e) => handleInputChange('neighborhood', e.target.value)} />
+                <InputsCadastro name='Bairro' type='text' placeholder='Ex: Example' value={bairroCep} onChange={(e) => handleInputChange('neighborhood', e.target.value)} style={{ background: validateInput('neighborhood', bairroCep) ? 'lightgreen' : 'lightcoral' }} />
             </div>
             <div className={styles.nextStep}>
                 <button onClick={handleFormCadastro} >Avançar</button>
