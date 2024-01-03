@@ -3,10 +3,10 @@ import { Poppins } from 'next/font/google'
 import styles from './page.module.css'
 import Link from 'next/link'
 import CardPlano from '@/app/components/CardsPlano/CardPlano'
-import {useRouter, usePathname, redirect } from "next/navigation"
+import { useRouter, usePathname, redirect } from "next/navigation"
 import { toast } from 'react-toastify';
 import { useContext, useEffect } from 'react'
-import {CadastroContext} from '@/app/Context/CadastroState'
+import { CadastroContext } from '@/app/Context/CadastroState'
 
 
 
@@ -18,23 +18,29 @@ const poppins = Poppins({
 
 export default function Page() {
     const router = useRouter()
-    const pathName = usePathname()
-    const {formData} = useContext(CadastroContext)
+    const { formData } = useContext(CadastroContext)
+    const { full_name, first_name, email, cpf, phone, phone2, cep, birth_date } = formData
 
 
-    if((formData === '' || !formData) && pathName === '/alunos/cadastro/planos'){
-        return redirect('/alunos/cadastro');
-    }
+
+    useEffect(() => {
+        if (!full_name || !first_name || !email || !cpf || !phone || !phone2 || !cep || !birth_date || !formData) {
+            // Voltar uma página
+            toast.error('Você deve preencher o formulário')
+            return router.back(); 
+          
+        }
+      }, [formData]);
 
 
-  
-    async function createStudent(){
-        try{
 
-            const  response = await fetch('https://ivitalize-api.onrender.com/api/v1/students',  {
+    async function createStudent() {
+        try {
+
+            const response = await fetch('https://ivitalize-api.onrender.com/api/v1/students', {
                 method: "POST",
                 headers: {
-                  "Content-type": "application/json",
+                    "Content-type": "application/json",
                 },
                 body: JSON.stringify({
                     full_name: formData.full_name,
@@ -53,23 +59,23 @@ export default function Page() {
                     neighborhood: formData.neighborhood,
 
                 }),
-              })
+            })
 
-              const data = await response.json();
+            const data = await response.json();
 
-              if(response.ok){
+            if (response.ok) {
                 router.replace('/alunos')
                 toast.success('Aluno cadastrado com sucesso!')
                 return data
-              }
+            }
 
-        }catch(e){
+        } catch (e) {
             console.error(e)
             toast.error('Erro no cadastro, tente novamente!')
             router.replace('/alunos')
         }
     }
-  
+
 
     return (
         <main className={`${poppins.className} ${styles.Main}`}>
@@ -80,10 +86,10 @@ export default function Page() {
 
             <section>
                 <CardPlano onClick={createStudent} />
-                <CardPlano onClick={createStudent}/>
-                <CardPlano onClick={createStudent}/>
-                <CardPlano onClick={createStudent}/>
-                <CardPlano onClick={createStudent}/>
+                <CardPlano onClick={createStudent} />
+                <CardPlano onClick={createStudent} />
+                <CardPlano onClick={createStudent} />
+                <CardPlano onClick={createStudent} />
             </section>
 
         </main>

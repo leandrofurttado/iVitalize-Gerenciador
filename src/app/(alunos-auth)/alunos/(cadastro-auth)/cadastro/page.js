@@ -6,6 +6,7 @@ import InputsCadastro from '@/app/components/InputsCadastro/InputsCadastro'
 import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
 import { CadastroContext } from '@/app/Context/CadastroState'
+import { useRouter } from "next/navigation"
 
 
 const poppins = Poppins({
@@ -18,6 +19,7 @@ export default function Page() {
     const { formData, setFormData } = useContext(CadastroContext)
     const [bairroCep, setBairroCEP] = useState('')
     const [ruaCep, setRuaCep] = useState('')
+    const router = useRouter()
 
 
 
@@ -84,7 +86,7 @@ export default function Page() {
 
     const handleFormCadastro = () => {
         if (validateInputs()) {
-            console.log('Cadastro OK');
+            router.replace('/alunos/cadastro/planos')
             // Adicione aqui a lógica para prosseguir com o cadastro
         }
     };
