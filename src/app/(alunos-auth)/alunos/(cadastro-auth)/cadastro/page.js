@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from 'react'
 import { CadastroContext } from '@/app/Context/CadastroState'
 import { useRouter } from "next/navigation"
 import { format, addYears } from 'date-fns';
+import { toast } from 'react-toastify'
 
 
 const poppins = Poppins({
@@ -17,7 +18,7 @@ const poppins = Poppins({
 
 export default function Page() {
 
-    const { formData, setFormData } = useContext(CadastroContext)
+    const { formData, setFormData, photo, setPhoto, cepValidContext, setCepValidContext} = useContext(CadastroContext)
     const [bairroCep, setBairroCEP] = useState('')
     const [ruaCep, setRuaCep] = useState('')
     const [cepInValidation, setCepInValidation] = useState('')
@@ -71,23 +72,29 @@ function getDateLimits() {
 
     const validateInputs = () => {
         // Validação para Nome Completo e Nome
-        const { full_name, first_name, email, cpf, phone, phone2, cep, birth_date } = formData
+        const { full_name, first_name, email, cpf, phone, cep, birth_date, address, complement, house_number, gender, schedule, modality } = formData
 
    
 
-        if (!full_name || !first_name || !email || !cpf || !phone || !phone2 || !cep || !birth_date) {
-            console.log('Campos em branco!')
+        if (!full_name || !first_name || !email || !cpf, !phone, !cep, !birth_date || !address || !complement || !house_number || !gender || !schedule || !modality) {
+            toast.warn('Todos os campos deverão ser preenchidos!')
+            console.log(formData)
             return false
         }
 
-        if (formData['full_name'].length < 3 || formData['first_name'].length < 3) {
+        if (typeof formData['full_name'] !== 'string' || typeof formData['first_name'] !== 'string' || formData['full_name'].length < 3 || formData['first_name'].length < 3) {
             console.log('Nome completo e primeiro nome devem conter no mínimo 3 letras');
+            return false;
+        }
+
+        if (typeof formData['address'] !== 'string' || typeof formData['neighborhood'] !== 'string' || typeof formData['complement'] !== 'string'  || formData['address'].length < 3 || formData['neighborhood'].length < 3 || formData['complement'].length < 3) {
+            console.log('Complemento, Endereço e Bairro tem de ser maior que 3');
             return false;
         }
 
         // Validação para CPF
         if (!validateCPF(formData['cpf'])) {
-            console.log('CPF inválido');
+            toast.error('CPF Inválido!')
             return false;
         }
 
@@ -98,14 +105,18 @@ function getDateLimits() {
         }
 
         // Validação para CEP
-        if (!validateCEP(formData['cep'], formData['cpf']) || formData['cep'].length > 9 || formData['cep'] < 8) {
-            console.log('CEP inválido');
+        if (
+            typeof formData['cep'] !== 'string' ||  // Check if 'cep' is a string
+            !validateCEP(formData['cep'], formData['cpf']) ||  // Your custom validation logic
+            formData['cep'].length !== 8
+        ) {
+            toast.error('CEP Inválido')
             return false;
         }
 
         // Validação para Telefone
-        if (!validatePhone(formData['phone']) || !validatePhone(formData['phone2'])) {
-            console.log('Telefone inválido');
+        if (!validatePhone(formData['phone'])) {
+            toast.error("Telefone deve conter 11 dígitos");
             return false;
         }
 
@@ -113,14 +124,7 @@ function getDateLimits() {
         return true;
     };
 
-    const handleFormCadastro = () => {
-        if (validateInputs()) {
-            router.replace('/alunos/cadastro/planos')
-            
-            // Adicione aqui a lógica para prosseguir com o cadastro
-        }
-        console.log(formData)
-    };
+   
 
     const validateEmail = (email) => {
         // Implemente a lógica de validação do email
@@ -131,9 +135,8 @@ function getDateLimits() {
     const validatePhone = (phone) => {
         // Implemente a lógica de validação do telefone
         // Retorne true se o telefone for válido, false caso contrário
-        const regexTelefone = /^(?:\()?\d{0,2}(?:\))?(?:[-.\s]?\d{4,5}){1,2}[-.\s]?\d{4}$/;
-
-        return (regexTelefone.test(phone));
+        const regexNumerosOnzeDigitos = /^[0-9]{11}$/;
+        return  (regexNumerosOnzeDigitos.test(phone))
        
     };
 
@@ -181,8 +184,10 @@ function getDateLimits() {
 
     async function validateCEP(cep) {
         console.log(cep);
+        const cepValid = parseInt(cep, 10)
+        
         try {
-            const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`, {
+            const response = await fetch(`https://brasilaberto.com/api/v1/zipcode/${cepValid}`, {
                 method: "GET",
                 headers: {
                     "Content-type": "application/json",
@@ -191,15 +196,17 @@ function getDateLimits() {
     
             const cepVerify = await response.json();
     
-            if (!cepVerify.erro) {
+            if (response.ok) {
                 setBairroCEP(cepVerify.bairro)
                 setRuaCep(cepVerify.logradouro)
                 console.log('CEP VÁLIDO');
                 console.log(cepVerify)
+                setCepValidContext('green')
           
                 return cepVerify;
             } else {
                 console.log('CEP INVÁLIDO');
+                setCepValidContext('red')
                 return false;
             }
         } catch (error) {
@@ -211,19 +218,20 @@ function getDateLimits() {
 
 
     const completeCEP = async (cep, value) => {
-        setCepInValidation(value)
+        handleInputChange(cep, value)
         const cepVerificationResult = await validateCEP(value);
+        
 
         if (cepVerificationResult) {
-            setBairroCEP(cepVerificationResult.bairro)
-            setRuaCep(cepVerificationResult.logradouro)
-            const cepSemTraco = cepVerificationResult.cep.replace(/-/g, '');
+            setBairroCEP(cepVerificationResult.result.district)
+            setRuaCep(cepVerificationResult.result.street)
+            setCepInValidation(true)
             // Valid CEP
             setFormData((prevFormData) => ({
                 ...prevFormData,
-                cep: cepSemTraco,
-                neighborhood: cepVerificationResult.bairro,
-                address: `${cepVerificationResult.logradouro}, ${cepVerificationResult.localidade} - ${cepVerificationResult.uf}`  // Update the CEP in formData with the validated CEP
+                cep: cepVerificationResult.result.zipcode,
+                neighborhood: cepVerificationResult.result.district,
+                address: `${cepVerificationResult.result.street}, ${cepVerificationResult.result.city} - ${cepVerificationResult.result.stateShortname}`  // Update the CEP in formData with the validated CEP
                 
             }));
 
@@ -234,20 +242,31 @@ function getDateLimits() {
     };
 
   function validateInput(field, value) {
+    if(field === 'cep' && cepValidContext === 'gray'){
+        return '#ccc'
+    }
+   
     if (value === '' || !value) {
+    
       return '#ccc';
     }
 
-    if (field === 'cep' && value== formData['cep']){
+    if(field === 'email' && validateEmail(value)){
+        return 'lightgreen'
+    }
+
+    if(field === 'cpf' && validateCPF(value)){
+        return 'lightgreen'
+    }
+
+    if (field === 'cep' &&  cepValidContext === 'green'){
         return 'lightgreen'
     }
     if ((field === 'modality' && formData['modality']) || ((field === 'schedule' && formData['schedule'])) || ((field === 'gender' && formData['gender'])) || ((field === 'birth_date' && formData['birth_date']))){
         return 'lightgreen'
     }
 
-    if ((field === 'address' || field === 'neighborhood' || field === 'complement' ) &&  value.length > 3) {
-        // Adapte a lógica de validação para o campo 'Bairro'
-        // Neste exemplo, estou apenas verificando se o comprimento é maior que 3
+    if ((field === 'address' || field === 'neighborhood' || field === 'complement' || field === 'full_name' ||field === 'first_name') &&  value.length > 2) {
         return 'lightgreen'
       }
 
@@ -271,6 +290,17 @@ function getDateLimits() {
     // Adicione mais lógica de validação para outros campos conforme necessário
   }
 
+
+  const handleFormCadastro = () => {
+    if (validateInputs()) {
+        router.push('/alunos/cadastro/planos')
+        console.log('Tudo, ok!')
+        // Adicione aqui a lógica para prosseguir com o cadastro
+    }
+    console.log("Inconformidades nos campos", formData)
+};
+
+
     return (
         <main className={`${poppins.className} ${styles.Main}`}>
             <div className={styles.barAlunos}>
@@ -293,10 +323,10 @@ function getDateLimits() {
                     </div>
                 </div>
                 <div className={styles.inputsAluno}>
-                    <InputsCadastro name='Nome Completo' length='medium' placeholder='Ex: Maria Soares da Silva' type='text' value={formData['full_name']} onChange={(e) => handleInputChange('full_name', e.target.value)} />
-                    <InputsCadastro name='Primeiro Nome' length='small' type='text' placeholder='Ex: Maria' value={formData['first_name']} onChange={(e) => handleInputChange('first_name', e.target.value)} />
-                    <InputsCadastro name='Email' length='large' type='email' placeholder='Ex: example@example.com' value={formData['email']} onChange={(e) => handleInputChange('email', e.target.value)} />
-                    <InputsCadastro name='CPF' length='medium' type='text' placeholder='Ex: 000.000.000-00' value={formData['cpf']} onChange={(e) => handleInputChange('cpf', e.target.value)} />
+                    <InputsCadastro name='Nome Completo' length='medium' placeholder='Ex: Maria Soares da Silva' type='text' value={formData['full_name']} max={40} onChange={(e) => handleInputChange('full_name', e.target.value)} style={{ border: ` 2px solid ${validateInput('full_name', formData['full_name'])}` }}/>
+                    <InputsCadastro name='Primeiro Nome' length='small' type='text' placeholder='Ex: Maria' value={formData['first_name']} max={10} onChange={(e) => handleInputChange('first_name', e.target.value)} style={{ border: ` 2px solid ${validateInput('first_name', formData['first_name'])}` }}/>
+                    <InputsCadastro name='Email' length='large' type='email' placeholder='Ex: example@example.com' value={formData['email']} maxLength={40} onChange={(e) => handleInputChange('email', e.target.value)} style={{ border: ` 2px solid ${validateInput('email', formData['email'])}` }}/>
+                    <InputsCadastro name='CPF' length='medium' maxLength={11} type='text' placeholder='Ex: 000.000.000-00' value={formData['cpf']} onChange={(e) => handleInputChange('cpf', e.target.value)} style={{ border: ` 2px solid ${validateInput('cpf', formData['cpf'])}` }} />
                     <InputsCadastro name='Data de Nascimento' type='date' placeholder='00/00/0000' value={formData['birth_date']} onChange={(e) => handleInputChange('birth_date', e.target.value)} max={formattedCurrentDate} min={formattedMinDate} style={{ border: ` 2px solid ${validateInput('birth_date', formData['birth_date'])}` }}/>
                     <InputsCadastro name='Sexo' length='small' type='select' select='sexo' value={formData['gender']} onChange={(e) => handleInputChange('gender', e.target.value)} style={{ border: ` 2px solid ${validateInput('gender', formData['gender'])}` }}/>
                     <InputsCadastro name='Telefone' type='tel' maxLength={11} placeholder='(00) 000000000' value={formData['phone']} onChange={(e) => handleInputChange('phone', e.target.value)} style={{ border: ` 2px solid ${validateInput('phone', formData['phone'])}` }}/>
@@ -307,8 +337,8 @@ function getDateLimits() {
             <hr></hr>
             <div className={styles.localization}>
                 <InputsCadastro name='Endereco' type='text' value={formData['address']} length='biggest' placeholder='Ex: Rua exemple, 150'  onChange={(e) => handleInputChange('address', e.target.value)} style={{ border: ` 2px solid ${validateInput('address', formData['address'])}` }}/>
-                <InputsCadastro name='CEP' type='text'  step={1} maxLength={8} placeholder='Ex: 12345-678' value={cepInValidation} onChange={(e) => completeCEP('cep', e.target.value)} style={{ border: ` 2px solid ${validateInput('cep', cepInValidation)}` }} />
-                <InputsCadastro name='Bairro' type='text' value={bairroCep} placeholder='Ex: Example'  onChange={(e) => handleInputChange('neighborhood', e.target.value)} style={{ border: ` 2px solid ${validateInput('neighborhood', formData['neighborhood'])}` }} />
+                <InputsCadastro name='CEP' type='text'  step={1} maxLength={8} placeholder='Ex: 12345-678' value={formData['cep']} onChange={(e) => completeCEP('cep', e.target.value)} style={{ border: ` 2px solid ${validateInput('cep', cepValidContext)}` }} />
+                <InputsCadastro name='Bairro' type='text' value={formData['neighborhood']} placeholder='Ex: Example'  onChange={(e) => handleInputChange('neighborhood', e.target.value)} style={{ border: ` 2px solid ${validateInput('neighborhood', formData['neighborhood'])}` }} />
                 <InputsCadastro name='Complemento' type='text' value={formData['complement']} placeholder='Ex: Casa'  onChange={(e) => handleInputChange('complement', e.target.value)} style={{ border: ` 2px solid ${validateInput('complement', formData['complement'])}` }}/>
                 <InputsCadastro name='Número' type='text' value={formData['house_number']} placeholder='Ex: 32'  onChange={(e) => handleInputChange('house_number', e.target.value)} style={{ border: ` 2px solid ${validateInput('house_number', formData['house_number'])}` }}/>
             </div>

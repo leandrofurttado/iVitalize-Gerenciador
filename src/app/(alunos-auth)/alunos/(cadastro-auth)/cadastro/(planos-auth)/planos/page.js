@@ -19,17 +19,14 @@ const poppins = Poppins({
 export default function Page() {
     const router = useRouter()
     const { formData } = useContext(CadastroContext)
-    const { full_name, first_name, email, cpf, phone, phone2, cep, birth_date } = formData
-
-
 
     useEffect(() => {
-        if (!full_name || !first_name || !email || !cpf || !phone || !phone2 || !cep || !birth_date || !formData) {
-            // Voltar uma página
-            toast.error('Você deve preencher o formulário')
-            return router.back(); 
-          
+           const { full_name, first_name, email, cpf, phone, cep, birth_date, address, complement, house_number, gender, schedule, modality } = formData
+        if (!full_name || !first_name || !email || !cpf, !phone, !cep, !birth_date || !address || !complement || !house_number || !gender || !schedule || !modality) {
+            toast.warn('Todos os campos deverão ser preenchidos!')
+            return router.back()
         }
+
       }, [formData]);
 
 
