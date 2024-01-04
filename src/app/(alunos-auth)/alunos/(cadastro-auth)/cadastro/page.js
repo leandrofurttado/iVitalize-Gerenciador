@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
 import { CadastroContext } from '@/app/Context/CadastroState'
 import { useRouter } from "next/navigation"
+import { format, addYears } from 'date-fns';
 
 
 const poppins = Poppins({
@@ -19,19 +20,43 @@ export default function Page() {
     const { formData, setFormData } = useContext(CadastroContext)
     const [bairroCep, setBairroCEP] = useState('')
     const [ruaCep, setRuaCep] = useState('')
-    const [isValid, setIsValid] = useState(false)
+    const [cepInValidation, setCepInValidation] = useState('')
     const router = useRouter()
-
-
+    
+//Actual Date
+function getDateLimits() {
+    const currentDate = new Date();
+    const minDate = addYears(currentDate, -80);
+    const formattedCurrentDate = format(currentDate, 'yyyy-MM-dd');
+    const formattedMinDate = format(minDate, 'yyyy-MM-dd');
+  
+    return { formattedCurrentDate, formattedMinDate };
+  }
+      const {formattedCurrentDate, formattedMinDate} = getDateLimits()
 
     const handleInputChange = (name, value) => {
-        if (name === 'neighborhood') {
-            // Update only the neighborhood field
-            setBairroCEP(value);
-        } else if (name === 'adress') {
-            // Update only the address field
-            setRuaCep(value);
-        } else {
+
+            if (name === 'neighborhood'){
+                setBairroCEP(value)
+                setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    [name]: value,
+    
+    
+                }))
+            }
+
+            
+            if (name === 'address'){
+                setRuaCep(value)
+                setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    [name]: value,
+    
+    
+                }))
+            }
+      
             // Update other form fields
             setFormData((prevFormData) => ({
                 ...prevFormData,
@@ -40,7 +65,7 @@ export default function Page() {
 
             }));
             
-        }
+        
     };
 
 
@@ -91,8 +116,10 @@ export default function Page() {
     const handleFormCadastro = () => {
         if (validateInputs()) {
             router.replace('/alunos/cadastro/planos')
+            
             // Adicione aqui a lógica para prosseguir com o cadastro
         }
+        console.log(formData)
     };
 
     const validateEmail = (email) => {
@@ -183,25 +210,65 @@ export default function Page() {
     }
 
 
- function completeCEP(cep, value){
-    validateCEP(value)
-   
-  }
+    const completeCEP = async (cep, value) => {
+        setCepInValidation(value)
+        const cepVerificationResult = await validateCEP(value);
+
+        if (cepVerificationResult) {
+            setBairroCEP(cepVerificationResult.bairro)
+            setRuaCep(cepVerificationResult.logradouro)
+            const cepSemTraco = cepVerificationResult.cep.replace(/-/g, '');
+            // Valid CEP
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                cep: cepSemTraco,
+                neighborhood: cepVerificationResult.bairro,
+                address: `${cepVerificationResult.logradouro}, ${cepVerificationResult.localidade} - ${cepVerificationResult.uf}`  // Update the CEP in formData with the validated CEP
+                
+            }));
+
+            return true
+        }
+            return false
+
+    };
 
   function validateInput(field, value) {
     if (value === '' || !value) {
-      return false;
+      return '#ccc';
     }
+
+    if (field === 'cep' && value== formData['cep']){
+        return 'lightgreen'
+    }
+    if ((field === 'modality' && formData['modality']) || ((field === 'schedule' && formData['schedule'])) || ((field === 'gender' && formData['gender'])) || ((field === 'birth_date' && formData['birth_date']))){
+        return 'lightgreen'
+    }
+
+    if ((field === 'address' || field === 'neighborhood' || field === 'complement' ) &&  value.length > 3) {
+        // Adapte a lógica de validação para o campo 'Bairro'
+        // Neste exemplo, estou apenas verificando se o comprimento é maior que 3
+        return 'lightgreen'
+      }
+
+      if(field === 'house_number' && value.length >= 1){
+        return 'lightgreen'
+      }
+
+      if(field === 'phone' && value){
+        const regexNumerosOnzeDigitos = /^[0-9]{11}$/;
+         if (regexNumerosOnzeDigitos.test(value)){
+            
+            return 'lightgreen'
+         }
+
+        
+      }
   
-    if (field === 'neighborhood') {
-      // Adapte a lógica de validação para o campo 'Bairro'
-      // Neste exemplo, estou apenas verificando se o comprimento é maior que 3
-      return value.length > 3;
-    }
+    return 'lightcoral'
+    
   
     // Adicione mais lógica de validação para outros campos conforme necessário
-  
-    return true;
   }
 
     return (
@@ -230,19 +297,20 @@ export default function Page() {
                     <InputsCadastro name='Primeiro Nome' length='small' type='text' placeholder='Ex: Maria' value={formData['first_name']} onChange={(e) => handleInputChange('first_name', e.target.value)} />
                     <InputsCadastro name='Email' length='large' type='email' placeholder='Ex: example@example.com' value={formData['email']} onChange={(e) => handleInputChange('email', e.target.value)} />
                     <InputsCadastro name='CPF' length='medium' type='text' placeholder='Ex: 000.000.000-00' value={formData['cpf']} onChange={(e) => handleInputChange('cpf', e.target.value)} />
-                    <InputsCadastro name='Data de Nascimento' type='date' placeholder='00/00/0000' value={formData['birth_date']} onChange={(e) => handleInputChange('birth_date', e.target.value)} />
-                    <InputsCadastro name='Sexo' length='small' type='select' select='sexo' value={formData['gender']} onChange={(e) => handleInputChange('gender', e.target.value)} />
-                    <InputsCadastro name='Telefone 1' type='tel' placeholder='(00) 000000000' value={formData['phone']} onChange={(e) => handleInputChange('phone', e.target.value)} />
-                    <InputsCadastro name='Telefone 2' type='tel' placeholder='(00) 000000000' value={formData['phone2']} onChange={(e) => handleInputChange('phone2', e.target.value)} />
-                    <InputsCadastro name='Horario' type='select' select='horario' value={formData['schedule']} onChange={(e) => handleInputChange('schedule', e.target.value)} />
-                    <InputsCadastro name='Modalidade' type='select' select='modalidade' value={formData['modality']} onChange={(e) => handleInputChange('modality', e.target.value)} />
+                    <InputsCadastro name='Data de Nascimento' type='date' placeholder='00/00/0000' value={formData['birth_date']} onChange={(e) => handleInputChange('birth_date', e.target.value)} max={formattedCurrentDate} min={formattedMinDate} style={{ border: ` 2px solid ${validateInput('birth_date', formData['birth_date'])}` }}/>
+                    <InputsCadastro name='Sexo' length='small' type='select' select='sexo' value={formData['gender']} onChange={(e) => handleInputChange('gender', e.target.value)} style={{ border: ` 2px solid ${validateInput('gender', formData['gender'])}` }}/>
+                    <InputsCadastro name='Telefone' type='tel' maxLength={11} placeholder='(00) 000000000' value={formData['phone']} onChange={(e) => handleInputChange('phone', e.target.value)} style={{ border: ` 2px solid ${validateInput('phone', formData['phone'])}` }}/>
+                    <InputsCadastro name='Horario' type='select' select='horario' value={formData['schedule']} onChange={(e) => handleInputChange('schedule', e.target.value)} style={{ border: ` 2px solid ${validateInput('schedule', formData['schedule'])}` }}/>
+                    <InputsCadastro name='Modalidade' type='select' select='modalidade' value={formData['modality']} onChange={(e) => handleInputChange('modality', e.target.value)} style={{ border: ` 2px solid ${validateInput('modality', formData['modality'])}` }}/>
                 </div>
             </div>
             <hr></hr>
             <div className={styles.localization}>
-                <InputsCadastro name='Endereco' type='text' length='biggest' placeholder='Ex: Rua exemple, 150' value={ruaCep} onChange={(e) => handleInputChange('adress', e.target.value)} />
-                <InputsCadastro name='CEP' type='text' placeholder='Ex: 12345-678' value={formData['cep']} onChange={(e) => completeCEP('cep', e.target.value)} />
-                <InputsCadastro name='Bairro' type='text' placeholder='Ex: Example' value={bairroCep} onChange={(e) => handleInputChange('neighborhood', e.target.value)} style={{ background: validateInput('neighborhood', bairroCep) ? 'lightgreen' : 'lightcoral' }} />
+                <InputsCadastro name='Endereco' type='text' value={formData['address']} length='biggest' placeholder='Ex: Rua exemple, 150'  onChange={(e) => handleInputChange('address', e.target.value)} style={{ border: ` 2px solid ${validateInput('address', formData['address'])}` }}/>
+                <InputsCadastro name='CEP' type='text'  step={1} maxLength={8} placeholder='Ex: 12345-678' value={cepInValidation} onChange={(e) => completeCEP('cep', e.target.value)} style={{ border: ` 2px solid ${validateInput('cep', cepInValidation)}` }} />
+                <InputsCadastro name='Bairro' type='text' value={bairroCep} placeholder='Ex: Example'  onChange={(e) => handleInputChange('neighborhood', e.target.value)} style={{ border: ` 2px solid ${validateInput('neighborhood', formData['neighborhood'])}` }} />
+                <InputsCadastro name='Complemento' type='text' value={formData['complement']} placeholder='Ex: Casa'  onChange={(e) => handleInputChange('complement', e.target.value)} style={{ border: ` 2px solid ${validateInput('complement', formData['complement'])}` }}/>
+                <InputsCadastro name='Número' type='text' value={formData['house_number']} placeholder='Ex: 32'  onChange={(e) => handleInputChange('house_number', e.target.value)} style={{ border: ` 2px solid ${validateInput('house_number', formData['house_number'])}` }}/>
             </div>
             <div className={styles.nextStep}>
                 <button onClick={handleFormCadastro} >Avançar</button>

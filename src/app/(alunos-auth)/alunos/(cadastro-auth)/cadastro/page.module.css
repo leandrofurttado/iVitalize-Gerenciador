@@ -107,8 +107,10 @@
     display: flex;
     flex-wrap: wrap;
     margin-top: 50px;
+    height: 130px;
     width: 700px;
     align-items: center;
+    justify-content: space-evenly;
     margin-left: 360px;
    
 }

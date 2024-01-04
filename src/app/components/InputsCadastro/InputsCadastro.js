@@ -2,12 +2,12 @@ import styles from './InputsCadastro.module.css'
 
 
 
-export default function InputsCadastro({ name, length, placeholder, type, select, value, onChange, isValid, style }) {
+export default function InputsCadastro({ name, length, placeholder, type, select, value, onChange, style, step, maxLength, max, min}) {
     return (
         <div className={`${styles.inputConfig}`}>
             <label>{name}</label>
             {!select && (
-                <input className={`${styles.input} ${styles['input_' + length]}`} type={type} placeholder={placeholder} value={value} onChange={onChange} style={style}></input>
+                <input className={`${styles.input} ${styles['input_' + length]}`} type={type} placeholder={placeholder} value={value} onChange={onChange} style={style} step={step} maxLength={maxLength} max={max} min={min}></input>
             )}
             {select == 'sexo' && (
                 <select className={`${styles.input} ${styles['input_' + length]}`} value={value} onChange={onChange} style={style}>
