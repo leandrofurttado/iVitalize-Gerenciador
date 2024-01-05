@@ -11,6 +11,7 @@ export default function InputsCadastro({ name, length, placeholder, type, select
             )}
             {select == 'sexo' && (
                 <select className={`${styles.input} ${styles['input_' + length]}`} value={value} onChange={onChange} style={style}>
+                    <option value={null} ></option>
                     <option value={'male'} >Masculino</option>
                     <option value={'female'} >Feminino</option>
                     <option value={'other'}>Outro</option>
@@ -18,6 +19,7 @@ export default function InputsCadastro({ name, length, placeholder, type, select
             )}
             {select == 'horario' && (
                 <select className={`${styles.input} ${styles['input_' + length]}`} value={value} onChange={onChange} style={style}>
+                    <option value={null} ></option>
                     <option value={0}>Manhã</option>
                     <option value={1}>Tarde</option>
                     <option value={2}>Noite</option>
@@ -25,6 +27,7 @@ export default function InputsCadastro({ name, length, placeholder, type, select
             )}
             {select == 'modalidade' && (
                 <select className={`${styles.input} ${styles['input_' + length]}`} value={value} onChange={onChange} style={style}>
+                    <option value={null} ></option>
                     <option value={0}>Musculação</option>
                     <option value={1}>Crossfit</option>
                     <option value={2}>Luta</option>
