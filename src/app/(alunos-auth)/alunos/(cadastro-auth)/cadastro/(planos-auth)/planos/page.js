@@ -5,8 +5,10 @@ import Link from 'next/link'
 import CardPlano from '@/app/components/CardsPlano/CardPlano'
 import { useRouter, usePathname, redirect } from "next/navigation"
 import { toast } from 'react-toastify';
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CadastroContext } from '@/app/Context/CadastroState'
+import Loading from '@/app/loading'
+import LoadingCadastro from '@/app/components/LoadingCadastro/LoadingCadastro'
 
 
 
@@ -18,22 +20,24 @@ const poppins = Poppins({
 
 export default function Page() {
     const router = useRouter()
-    const { formData } = useContext(CadastroContext)
+    const { formData, photo } = useContext(CadastroContext)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-           const { full_name, first_name, email, cpf, phone, cep, birth_date, address, complement, house_number, gender, schedule, modality } = formData
+        const { full_name, first_name, email, cpf, phone, cep, birth_date, address, complement, house_number, gender, schedule, modality } = formData
         if (!full_name || !first_name || !email || !cpf, !phone, !cep, !birth_date || !address || !complement || !house_number || !gender || !schedule || !modality) {
             toast.warn('Todos os campos deverão ser preenchidos!')
             return router.back()
         }
 
-      }, [formData]);
+    }, [formData]);
 
 
 
     async function createStudent() {
         try {
 
+            setLoading(true)
             const response = await fetch('https://ivitalize-api.onrender.com/api/v1/students', {
                 method: "POST",
                 headers: {
@@ -51,9 +55,12 @@ export default function Page() {
                     ],
                     schedule: parseInt(formData.schedule),
                     modality: parseInt(formData.modality),
-                    address: formData.adress,
+                    address: formData.address,
                     cep: formData.cep,
                     neighborhood: formData.neighborhood,
+                    complement: formData.complement,
+                    house_number: formData.house_number,
+                    photo: photo
 
                 }),
             })
@@ -61,34 +68,52 @@ export default function Page() {
             const data = await response.json();
 
             if (response.ok) {
+                setLoading(false)
                 router.replace('/alunos')
                 toast.success('Aluno cadastrado com sucesso!')
                 return data
+            } else if (response.ok === 401) {
+                setLoading(false)
+                router.back()
+                toast.error('Aluno já cadastrado')
+
             }
 
         } catch (e) {
+            setLoading(false)
             console.error(e)
             toast.error('Erro no cadastro, tente novamente!')
-            router.replace('/alunos')
+            router.replace('/alunos/cadastro')
         }
     }
 
-
     return (
-        <main className={`${poppins.className} ${styles.Main}`}>
-            <div className={styles.barPlanos}>
-                <h1>PLANOS</h1>
-                <Link href='/alunos/cadastro'>Voltar</Link>
-            </div>
+        <main>
+            {loading && (
+                <LoadingCadastro></LoadingCadastro>
+            )}
 
-            <section>
-                <CardPlano onClick={createStudent} />
-                <CardPlano onClick={createStudent} />
-                <CardPlano onClick={createStudent} />
-                <CardPlano onClick={createStudent} />
-                <CardPlano onClick={createStudent} />
-            </section>
+            {!loading && (
+                <main className={`${poppins.className} ${styles.Main}`}>
+                    <div className={styles.barPlanos}>
+                        <h1>PLANOS</h1>
+                        <Link href='/alunos/cadastro'>Voltar</Link>
+                    </div>
+
+                    <section>
+                        <CardPlano onClick={createStudent} />
+                        <CardPlano onClick={createStudent} />
+                        <CardPlano onClick={createStudent} />
+                        <CardPlano onClick={createStudent} />
+                        <CardPlano onClick={createStudent} />
+                    </section>
+
+                </main>
+            )}
+
 
         </main>
+
+
     )
 }

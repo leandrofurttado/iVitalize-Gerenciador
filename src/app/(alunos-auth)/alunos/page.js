@@ -25,13 +25,15 @@ const poppins = Poppins({
 
 export default function Page() {
 
-    const {setFormData, setCepValidContext} = useContext(CadastroContext)
+    const {setFormData, setCepValidContext, setPhoto} = useContext(CadastroContext)
 
     const pathRoute = usePathname();
 
     if(pathRoute === '/alunos') {
         setFormData('')
         setCepValidContext('gray')
+        setPhoto(null)
+        
     }
 
     const [deleteCard, setDeleteCard] = useState(false)

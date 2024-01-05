@@ -6,7 +6,7 @@ export const CadastroContext = createContext()
 
 export const CadastroProvider = ({ children }) =>{
     const [formData, setFormData] = useState({})
-    const [photo, setPhoto] = useState()
+    const [photo, setPhoto] = useState(null)
     const [cepValidContext, setCepValidContext] = useState('gray')
     
 

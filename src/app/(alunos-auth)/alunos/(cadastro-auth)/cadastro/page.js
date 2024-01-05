@@ -11,6 +11,7 @@ import { format, addYears } from 'date-fns';
 import { toast } from 'react-toastify'
 
 
+
 const poppins = Poppins({
     subsets: ['latin'],
     weight: '500'
@@ -18,55 +19,57 @@ const poppins = Poppins({
 
 export default function Page() {
 
-    const { formData, setFormData, photo, setPhoto, cepValidContext, setCepValidContext} = useContext(CadastroContext)
+    const { formData, setFormData, photo, setPhoto, cepValidContext, setCepValidContext } = useContext(CadastroContext)
     const [bairroCep, setBairroCEP] = useState('')
     const [ruaCep, setRuaCep] = useState('')
     const [cepInValidation, setCepInValidation] = useState('')
+    const [image, setImage] = useState('');
     const router = useRouter()
-    
-//Actual Date
-function getDateLimits() {
-    const currentDate = new Date();
-    const minDate = addYears(currentDate, -80);
-    const formattedCurrentDate = format(currentDate, 'yyyy-MM-dd');
-    const formattedMinDate = format(minDate, 'yyyy-MM-dd');
-  
-    return { formattedCurrentDate, formattedMinDate };
-  }
-      const {formattedCurrentDate, formattedMinDate} = getDateLimits()
+
+
+    //Actual Date
+    function getDateLimits() {
+        const currentDate = new Date();
+        const minDate = addYears(currentDate, -80);
+        const formattedCurrentDate = format(currentDate, 'yyyy-MM-dd');
+        const formattedMinDate = format(minDate, 'yyyy-MM-dd');
+
+        return { formattedCurrentDate, formattedMinDate };
+    }
+    const { formattedCurrentDate, formattedMinDate } = getDateLimits()
 
     const handleInputChange = (name, value) => {
 
-            if (name === 'neighborhood'){
-                setBairroCEP(value)
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    [name]: value,
-    
-    
-                }))
-            }
-
-            
-            if (name === 'address'){
-                setRuaCep(value)
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    [name]: value,
-    
-    
-                }))
-            }
-      
-            // Update other form fields
+        if (name === 'neighborhood') {
+            setBairroCEP(value)
             setFormData((prevFormData) => ({
                 ...prevFormData,
                 [name]: value,
 
 
-            }));
-            
-        
+            }))
+        }
+
+
+        if (name === 'address') {
+            setRuaCep(value)
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                [name]: value,
+
+
+            }))
+        }
+
+        // Update other form fields
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+
+
+        }));
+
+
     };
 
 
@@ -74,7 +77,7 @@ function getDateLimits() {
         // Validação para Nome Completo e Nome
         const { full_name, first_name, email, cpf, phone, cep, birth_date, address, complement, house_number, gender, schedule, modality } = formData
 
-   
+
 
         if (!full_name || !first_name || !email || !cpf, !phone, !cep, !birth_date || !address || !complement || !house_number || !gender || !schedule || !modality) {
             toast.warn('Todos os campos deverão ser preenchidos!')
@@ -87,7 +90,7 @@ function getDateLimits() {
             return false;
         }
 
-        if (typeof formData['address'] !== 'string' || typeof formData['neighborhood'] !== 'string' || typeof formData['complement'] !== 'string'  || formData['address'].length < 3 || formData['neighborhood'].length < 3 || formData['complement'].length < 3) {
+        if (typeof formData['address'] !== 'string' || typeof formData['neighborhood'] !== 'string' || typeof formData['complement'] !== 'string' || formData['address'].length < 3 || formData['neighborhood'].length < 3 || formData['complement'].length < 3) {
             console.log('Complemento, Endereço e Bairro tem de ser maior que 3');
             return false;
         }
@@ -124,7 +127,7 @@ function getDateLimits() {
         return true;
     };
 
-   
+
 
     const validateEmail = (email) => {
         // Implemente a lógica de validação do email
@@ -136,8 +139,8 @@ function getDateLimits() {
         // Implemente a lógica de validação do telefone
         // Retorne true se o telefone for válido, false caso contrário
         const regexNumerosOnzeDigitos = /^[0-9]{11}$/;
-        return  (regexNumerosOnzeDigitos.test(phone))
-       
+        return (regexNumerosOnzeDigitos.test(phone))
+
     };
 
     const validateCPF = (cpf) => {
@@ -185,7 +188,7 @@ function getDateLimits() {
     async function validateCEP(cep) {
         console.log(cep);
         const cepValid = parseInt(cep, 10)
-        
+
         try {
             const response = await fetch(`https://brasilaberto.com/api/v1/zipcode/${cepValid}`, {
                 method: "GET",
@@ -193,16 +196,16 @@ function getDateLimits() {
                     "Content-type": "application/json",
                 },
             });
-    
+
             const cepVerify = await response.json();
-    
+
             if (response.ok) {
                 setBairroCEP(cepVerify.bairro)
                 setRuaCep(cepVerify.logradouro)
                 console.log('CEP VÁLIDO');
                 console.log(cepVerify)
                 setCepValidContext('green')
-          
+
                 return cepVerify;
             } else {
                 console.log('CEP INVÁLIDO');
@@ -220,7 +223,7 @@ function getDateLimits() {
     const completeCEP = async (cep, value) => {
         handleInputChange(cep, value)
         const cepVerificationResult = await validateCEP(value);
-        
+
 
         if (cepVerificationResult) {
             setBairroCEP(cepVerificationResult.result.district)
@@ -232,73 +235,89 @@ function getDateLimits() {
                 cep: cepVerificationResult.result.zipcode,
                 neighborhood: cepVerificationResult.result.district,
                 address: `${cepVerificationResult.result.street}, ${cepVerificationResult.result.city} - ${cepVerificationResult.result.stateShortname}`  // Update the CEP in formData with the validated CEP
-                
+
             }));
 
             return true
         }
-            return false
+        return false
 
     };
 
-  function validateInput(field, value) {
-    if(field === 'cep' && cepValidContext === 'gray'){
-        return '#ccc'
-    }
-   
-    if (value === '' || !value) {
-    
-      return '#ccc';
-    }
+    function validateInput(field, value) {
+        if (field === 'cep' && cepValidContext === 'gray') {
+            return '#ccc'
+        }
 
-    if(field === 'email' && validateEmail(value)){
-        return 'lightgreen'
-    }
+        if (value === '' || !value) {
 
-    if(field === 'cpf' && validateCPF(value)){
-        return 'lightgreen'
-    }
+            return '#ccc';
+        }
 
-    if (field === 'cep' &&  cepValidContext === 'green'){
-        return 'lightgreen'
-    }
-    if ((field === 'modality' && formData['modality']) || ((field === 'schedule' && formData['schedule'])) || ((field === 'gender' && formData['gender'])) || ((field === 'birth_date' && formData['birth_date']))){
-        return 'lightgreen'
-    }
-
-    if ((field === 'address' || field === 'neighborhood' || field === 'complement' || field === 'full_name' ||field === 'first_name') &&  value.length > 2) {
-        return 'lightgreen'
-      }
-
-      if(field === 'house_number' && value.length >= 1){
-        return 'lightgreen'
-      }
-
-      if(field === 'phone' && value){
-        const regexNumerosOnzeDigitos = /^[0-9]{11}$/;
-         if (regexNumerosOnzeDigitos.test(value)){
-            
+        if (field === 'email' && validateEmail(value)) {
             return 'lightgreen'
-         }
+        }
 
-        
-      }
-  
-    return 'lightcoral'
-    
-  
-    // Adicione mais lógica de validação para outros campos conforme necessário
-  }
+        if (field === 'cpf' && validateCPF(value)) {
+            return 'lightgreen'
+        }
+
+        if (field === 'cep' && cepValidContext === 'green') {
+            return 'lightgreen'
+        }
+        if ((field === 'modality' && formData['modality']) || ((field === 'schedule' && formData['schedule'])) || ((field === 'gender' && formData['gender'])) || ((field === 'birth_date' && formData['birth_date']))) {
+            return 'lightgreen'
+        }
+
+        if ((field === 'address' || field === 'neighborhood' || field === 'complement' || field === 'full_name' || field === 'first_name') && value.length > 2) {
+            return 'lightgreen'
+        }
+
+        if (field === 'house_number' && value.length >= 1) {
+            return 'lightgreen'
+        }
+
+        if (field === 'phone' && value) {
+            const regexNumerosOnzeDigitos = /^[0-9]{11}$/;
+            if (regexNumerosOnzeDigitos.test(value)) {
+
+                return 'lightgreen'
+            }
 
 
-  const handleFormCadastro = () => {
-    if (validateInputs()) {
-        router.push('/alunos/cadastro/planos')
-        console.log('Tudo, ok!')
-        // Adicione aqui a lógica para prosseguir com o cadastro
+        }
+
+        return 'lightcoral'
+
+
+        // Adicione mais lógica de validação para outros campos conforme necessário
     }
-    console.log("Inconformidades nos campos", formData)
-};
+
+    const handleImageSelect = (e) => {
+        const selectedImage = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = () => {
+            setPhoto(reader.result);
+        };
+
+        reader.readAsDataURL(selectedImage);
+
+    };
+
+    const handleClearImage = (e) => {
+        setPhoto(null)
+    }
+
+
+    const handleFormCadastro = () => {
+        if (validateInputs()) {
+            router.push('/alunos/cadastro/planos')
+            console.log('Tudo, ok!')
+            // Adicione aqui a lógica para prosseguir com o cadastro
+        }
+        console.log("Inconformidades nos campos", formData)
+    };
 
 
     return (
@@ -311,36 +330,41 @@ function getDateLimits() {
                 <div className={styles.containerUserImg}>
                     <div className={styles.userImage}>
                         <Image
-                            src='/images/userDefault.png'
-                            height={150}
-                            width={150}
+                            src={photo ? photo : '/images/userDefault.png'}
+                            height={200}
+                            width={200}
                             alt='userDefault'
                         />
-                        <div className={styles.buttonsImage}>
-                            <button className={styles.btnAdd}>Adicionar</button>
-                            <button className={styles.btnRemove}>Remover</button>
-                        </div>
                     </div>
+                    <div className={styles.buttonsImage}>
+                        <input
+                            type='file'
+                            accept='image/*'
+                            onChange={handleImageSelect}
+
+                        />
+                    </div>
+                    <button className={styles.btnRemove} onClick={handleClearImage}>Remover</button>
                 </div>
                 <div className={styles.inputsAluno}>
-                    <InputsCadastro name='Nome Completo' length='medium' placeholder='Ex: Maria Soares da Silva' type='text' value={formData['full_name']} max={40} onChange={(e) => handleInputChange('full_name', e.target.value)} style={{ border: ` 2px solid ${validateInput('full_name', formData['full_name'])}` }}/>
-                    <InputsCadastro name='Primeiro Nome' length='small' type='text' placeholder='Ex: Maria' value={formData['first_name']} max={10} onChange={(e) => handleInputChange('first_name', e.target.value)} style={{ border: ` 2px solid ${validateInput('first_name', formData['first_name'])}` }}/>
-                    <InputsCadastro name='Email' length='large' type='email' placeholder='Ex: example@example.com' value={formData['email']} maxLength={40} onChange={(e) => handleInputChange('email', e.target.value)} style={{ border: ` 2px solid ${validateInput('email', formData['email'])}` }}/>
+                    <InputsCadastro name='Nome Completo' length='medium' placeholder='Ex: Maria Soares da Silva' type='text' value={formData['full_name']} max={40} onChange={(e) => handleInputChange('full_name', e.target.value)} style={{ border: ` 2px solid ${validateInput('full_name', formData['full_name'])}` }} />
+                    <InputsCadastro name='Primeiro Nome' length='small' type='text' placeholder='Ex: Maria' value={formData['first_name']} max={10} onChange={(e) => handleInputChange('first_name', e.target.value)} style={{ border: ` 2px solid ${validateInput('first_name', formData['first_name'])}` }} />
+                    <InputsCadastro name='Email' length='large' type='email' placeholder='Ex: example@example.com' value={formData['email']} maxLength={40} onChange={(e) => handleInputChange('email', e.target.value)} style={{ border: ` 2px solid ${validateInput('email', formData['email'])}` }} />
                     <InputsCadastro name='CPF' length='medium' maxLength={11} type='text' placeholder='Ex: 000.000.000-00' value={formData['cpf']} onChange={(e) => handleInputChange('cpf', e.target.value)} style={{ border: ` 2px solid ${validateInput('cpf', formData['cpf'])}` }} />
-                    <InputsCadastro name='Data de Nascimento' type='date' placeholder='00/00/0000' value={formData['birth_date']} onChange={(e) => handleInputChange('birth_date', e.target.value)} max={formattedCurrentDate} min={formattedMinDate} style={{ border: ` 2px solid ${validateInput('birth_date', formData['birth_date'])}` }}/>
-                    <InputsCadastro name='Sexo' length='small' type='select' select='sexo' value={formData['gender']} onChange={(e) => handleInputChange('gender', e.target.value)} style={{ border: ` 2px solid ${validateInput('gender', formData['gender'])}` }}/>
-                    <InputsCadastro name='Telefone' type='tel' maxLength={11} placeholder='(00) 000000000' value={formData['phone']} onChange={(e) => handleInputChange('phone', e.target.value)} style={{ border: ` 2px solid ${validateInput('phone', formData['phone'])}` }}/>
-                    <InputsCadastro name='Horario' type='select' select='horario' value={formData['schedule']} onChange={(e) => handleInputChange('schedule', e.target.value)} style={{ border: ` 2px solid ${validateInput('schedule', formData['schedule'])}` }}/>
-                    <InputsCadastro name='Modalidade' type='select' select='modalidade' value={formData['modality']} onChange={(e) => handleInputChange('modality', e.target.value)} style={{ border: ` 2px solid ${validateInput('modality', formData['modality'])}` }}/>
+                    <InputsCadastro name='Data de Nascimento' type='date' placeholder='00/00/0000' value={formData['birth_date']} onChange={(e) => handleInputChange('birth_date', e.target.value)} max={formattedCurrentDate} min={formattedMinDate} style={{ border: ` 2px solid ${validateInput('birth_date', formData['birth_date'])}` }} />
+                    <InputsCadastro name='Sexo' length='small' type='select' select='sexo' value={formData['gender']} onChange={(e) => handleInputChange('gender', e.target.value)} style={{ border: ` 2px solid ${validateInput('gender', formData['gender'])}` }} />
+                    <InputsCadastro name='Telefone' type='tel' maxLength={11} placeholder='(00) 000000000' value={formData['phone']} onChange={(e) => handleInputChange('phone', e.target.value)} style={{ border: ` 2px solid ${validateInput('phone', formData['phone'])}` }} />
+                    <InputsCadastro name='Horario' type='select' select='horario' value={formData['schedule']} onChange={(e) => handleInputChange('schedule', e.target.value)} style={{ border: ` 2px solid ${validateInput('schedule', formData['schedule'])}` }} />
+                    <InputsCadastro name='Modalidade' type='select' select='modalidade' value={formData['modality']} onChange={(e) => handleInputChange('modality', e.target.value)} style={{ border: ` 2px solid ${validateInput('modality', formData['modality'])}` }} />
                 </div>
             </div>
             <hr></hr>
             <div className={styles.localization}>
-                <InputsCadastro name='Endereco' type='text' value={formData['address']} length='biggest' placeholder='Ex: Rua exemple, 150'  onChange={(e) => handleInputChange('address', e.target.value)} style={{ border: ` 2px solid ${validateInput('address', formData['address'])}` }}/>
-                <InputsCadastro name='CEP' type='text'  step={1} maxLength={8} placeholder='Ex: 12345-678' value={formData['cep']} onChange={(e) => completeCEP('cep', e.target.value)} style={{ border: ` 2px solid ${validateInput('cep', cepValidContext)}` }} />
-                <InputsCadastro name='Bairro' type='text' value={formData['neighborhood']} placeholder='Ex: Example'  onChange={(e) => handleInputChange('neighborhood', e.target.value)} style={{ border: ` 2px solid ${validateInput('neighborhood', formData['neighborhood'])}` }} />
-                <InputsCadastro name='Complemento' type='text' value={formData['complement']} placeholder='Ex: Casa'  onChange={(e) => handleInputChange('complement', e.target.value)} style={{ border: ` 2px solid ${validateInput('complement', formData['complement'])}` }}/>
-                <InputsCadastro name='Número' type='text' value={formData['house_number']} placeholder='Ex: 32'  onChange={(e) => handleInputChange('house_number', e.target.value)} style={{ border: ` 2px solid ${validateInput('house_number', formData['house_number'])}` }}/>
+                <InputsCadastro name='Endereco' type='text' value={formData['address']} length='biggest' placeholder='Ex: Rua exemple, 150' onChange={(e) => handleInputChange('address', e.target.value)} style={{ border: ` 2px solid ${validateInput('address', formData['address'])}` }} />
+                <InputsCadastro name='CEP' type='text' step={1} maxLength={8} placeholder='Ex: 12345-678' value={formData['cep']} onChange={(e) => completeCEP('cep', e.target.value)} style={{ border: ` 2px solid ${validateInput('cep', cepValidContext)}` }} />
+                <InputsCadastro name='Bairro' type='text' value={formData['neighborhood']} placeholder='Ex: Example' onChange={(e) => handleInputChange('neighborhood', e.target.value)} style={{ border: ` 2px solid ${validateInput('neighborhood', formData['neighborhood'])}` }} />
+                <InputsCadastro name='Complemento' type='text' value={formData['complement']} placeholder='Ex: Casa' onChange={(e) => handleInputChange('complement', e.target.value)} style={{ border: ` 2px solid ${validateInput('complement', formData['complement'])}` }} />
+                <InputsCadastro name='Número' type='text' value={formData['house_number']} placeholder='Ex: 32' onChange={(e) => handleInputChange('house_number', e.target.value)} style={{ border: ` 2px solid ${validateInput('house_number', formData['house_number'])}` }} />
             </div>
             <div className={styles.nextStep}>
                 <button onClick={handleFormCadastro} >Avançar</button>
