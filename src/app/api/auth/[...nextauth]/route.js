@@ -30,25 +30,17 @@ const nextAuthOptions = {
          
 
           const data = await response.json();
-
-        
-         
-          if (response.ok) {
-            if(data.error){
-              return 0
-            }
-            console.log(data)
-            // Retorna data se response.ok for true e data.error for false
-            return data;
-          } else {
-            // Adiciona informações de erro ao objeto retornado
-            console.log(data)
-            throw new Error(data?.error || 'Erro de autenticação');
-            
+           
+          if(response.ok && !data.error){
+            return data
           }
 
+          return
+        
         } catch (error) {
-          console.error(error)
+        
+          return error
+         
       
         }
       },

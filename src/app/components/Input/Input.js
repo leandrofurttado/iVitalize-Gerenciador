@@ -26,7 +26,6 @@ export default function Input({ type, name, placeholder, icon, BackgroundInput, 
         if (e.key === 'Enter') {
           e.preventDefault();
           handleEnterKey()
-          
         }  
       };
 

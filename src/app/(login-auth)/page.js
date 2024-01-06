@@ -47,19 +47,27 @@ export default function Login() {
       password,
       //Coloca false pois se não ele redireciona para uma pagina ja criada do nextAuth, como quero controlar coloco false
       redirect: false
-      
+
     })
 
-console.log(result)
+    console.log(result, 'REsult here <')
 
 
-    if(result.error){
+
+
+    if (result.error) {
+
+      if (result.status === 401) {
+        setRefresh(false);
+        toast.error(`Credenciais incorretas!`)
+        return
+      }
       setRefresh(false);
-      toast.error('Credenciais Incorretas!')
+      toast.error(`Ocorreu um erro, tente novamente mais tarde`)
       return
+
     }
 
-  
 
 
     //Deleta o historico para home, então o voltar n jogara mais para o login
@@ -67,7 +75,40 @@ console.log(result)
     toast.success('Login realizado com sucesso!')
   }
 
-  
+ async function handleEnterKey(){
+
+    if (email === '' || password === '') {
+      toast.warn('Todos os campos abaixo deverão ser preenchidos')
+      return
+    }
+
+    setRefresh(true);
+    //Chama nosso credentials com a função de logar envinado nossos dados coletados dos inputs email e password
+    const result = await signIn('credentials', {
+      email,
+      password,
+      //Coloca false pois se não ele redireciona para uma pagina ja criada do nextAuth, como quero controlar coloco false
+      redirect: false
+
+    })
+
+    if (result.error) {
+
+      if (result.status === 401) {
+        setRefresh(false);
+        toast.error(`Credenciais incorretas!`)
+        return
+      }
+      setRefresh(false);
+      toast.error(`Ocorreu um erro, tente novamente mais tarde`)
+      return
+
+    }
+
+    //Deleta o historico para home, então o voltar n jogara mais para o login
+    router.replace('/home')
+    toast.success('Login realizado com sucesso!')
+  }
 
   return (
 
@@ -91,10 +132,10 @@ console.log(result)
             alt="IconIvitalizer" />
         </div>
         <form >
-          <Input onChange={(e) => { setEmail(e.target.value) }} handleEnterKey={handleSubmit} type='email' name='email' placeholder='Digite seu email'BackgroundInput='backgroundGreen' icon='FaEnvelope' />
-          <Input onChange={(e) => { setPassword(e.target.value) }} handleEnterKey={handleSubmit} type='password' name='Senha' placeholder='Digite sua senha' BackgroundInput='backgroundGreen' icon='FaLock' showPass={'true'} />
+          <Input onChange={(e) => { setEmail(e.target.value) }} handleEnterKey={handleEnterKey} type='email' name='email' placeholder='Digite seu email' BackgroundInput='backgroundGreen' icon='FaEnvelope' />
+          <Input onChange={(e) => { setPassword(e.target.value) }} handleEnterKey={handleEnterKey} type='password' name='Senha' placeholder='Digite sua senha' BackgroundInput='backgroundGreen' icon='FaLock' showPass={'true'} />
         </form>
-        <Button functionClick={handleSubmit}   className={styles.Button} name='Entrar' type='submit' refresh={refresh ? true : false} />
+        <Button functionClick={handleSubmit} className={styles.Button} name='Entrar' type='submit' refresh={refresh ? true : false} />
         <div className={styles.Copyright}>
           <span className={`${poppins_regular.className}`}>iVitalize © 2023</span>
         </div>
