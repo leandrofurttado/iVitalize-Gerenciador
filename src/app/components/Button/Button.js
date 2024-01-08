@@ -15,7 +15,7 @@ export default function Button({ name, type, functionClick, refresh }) {
     return (
         
             <button onClick={functionClick}  className={`${styles.Button} ${poppins.className}`} type={type}>
-                {refresh ? <p className={styles.loading_circle}></p> : <p>{name}</p>}
+                {refresh ? <p className={styles.loading_circle}></p> : <p>{name}</p>} 
             </button>
         
     )
