@@ -1,6 +1,6 @@
-.cardContainer{
-    width: 350px;
-    height: 450px;
+.cardContainer {
+    width: 400px;
+    height: 800px;
     border-radius: 15px;
     box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -9,113 +9,127 @@
     margin-bottom: 50px;
     position: relative;
     z-index: 2;
-    
+
 }
 
 
-.plano{
+.plano {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     padding: 2em;
-    background-color: rgba(230, 227, 227, 0.51);
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(171, 240, 255, 1) 0%, rgba(185, 242, 255, 1) 0%);
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     height: 250px;
+
+
 }
 
-.plano h3{
-   font-size: 30px;
+.plano h3 {
+    font-size: 25px;
 }
-
-.plano h5{
-    margin-bottom: 5px;
-    font-size: 15px;
-    
-}
-.plano h5 svg{
-    font-size: 10px;
-}
-
-.plano h6{
-    margin-bottom: 5px;
-    font-size: 13px;
-}
-
-.plano h2{
-    margin-bottom: 20px;
-}
-
-.plano div{
-    background-color: #336381;
-    border-radius: 5px;
+.plano h4{
+    font-size: 25px;
+    background-color: rgba(0, 212, 255, 1);
     color: #FFF;
 }
 
-.modalidades{
+.plano h5 {
+    margin-bottom: 5px;
+    font-size: 18px;
+
+}
+
+.plano h5 svg {
+    font-size: 12px;
+}
+
+.plano h6 {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.plano h2 {
+    margin-bottom: 20px;
+}
+
+.plano div {
+    background: rgba(0, 212, 255, 1);
+    border-radius: 5px;
+    color: #FFF;
+    font-weight: 600;
+
+
+}
+
+.beneficios {
     display: flex;
     flex-direction: column;
     padding: 1em;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    margin-top: 25px;
+    margin-bottom: 15px;
 }
 
-.modalidades .imageModalidade{
-    background-color: #ccc;
-    border-radius: 100%;
-    width: 50px;
-    height: 50px;
-    margin-right: 5px;
+.beneficios svg {
+    color: green;
 }
 
-.imageModalidade img{
-    width: auto;
-    height: auto;
-}
 
-.modalidadeInfos{
+
+.buttonPlano {
     display: flex;
-    margin-top: 20px;
-}
-.modalidadeInfos p{
-    font-size: 12px;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(171, 240, 255, 1) 0%, rgba(185, 242, 255, 1) 0%);
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+    height: 90px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
-.modalidadeInfos h5{
-    font-size: 15px;
-}
-
-.modalidades button{
-    background-color: rgb(106, 194, 131);
-    margin-top: 20px;
+.buttonPlano button {
+    background: rgba(0, 212, 255, 1);
     height: 40px;
+    width: 160px;
     cursor: pointer;
     border-radius: 5px;
-    color: #FFF;
     font-weight: bold;
     position: relative;
     overflow: hidden;
+    font-weight: bold;
+  
 }
 
-.modalidades button span{
+.buttonPlano button span {
     position: relative;
     z-index: 1;
 }
 
-.modalidades button::before{
+.buttonPlano button::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 0%;
     transition: 0.7s ease-in-out;
-    background-color: #80d798;
-    
+   
+
+
 }
 
-.modalidades button:hover::before{
+.buttonPlano button:hover::before {
     width: 100%;
     height: 100%;
-    background-color: #80d798;
+    background-color: rgb(2, 193, 232)
+}
+
+.buttonPlano button:hover{
+    transition: 0.7s ease-in-out;
+    color: #FFF;
 }
