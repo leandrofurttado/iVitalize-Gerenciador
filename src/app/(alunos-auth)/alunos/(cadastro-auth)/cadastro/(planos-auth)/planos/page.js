@@ -101,7 +101,9 @@ export default function Page() {
                     </div>
 
                     <section>
-                        <CardPlano onClick={createStudent} />
+                        <CardPlano onClick={createStudent} plan={'DIAMOND'} price={'R$ 199,90'}/>
+                        <CardPlano onClick={createStudent} plan={'GOLD'} price={'R$ 129,90'}/>
+                        <CardPlano onClick={createStudent} plan={'SILVER'} price={'R$ 79,90'}/>
                     </section>
 
                 </main>

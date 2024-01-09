@@ -28,8 +28,7 @@
 }
 
 .Main section{
-    padding: 0 300px;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }

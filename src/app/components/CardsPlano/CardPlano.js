@@ -17,7 +17,7 @@ const inter = Kanit({
   })
 
 
-export default function CardPlano({ onClick }) {
+export default function CardPlano({ onClick, plan, price, beneficities }) {
 
     
 
@@ -31,12 +31,12 @@ export default function CardPlano({ onClick }) {
 
         >
             <div className={`${styles.cardContainer} ${inter.className}`}>
-                <div className={styles.plano}>
+                <div className={`${styles.plano} ${styles[`plano_${plan}`]}`}>
                     <h3>Plano Musculação</h3>
-                    <h4>DIAMOND</h4>
+                    <h4>{plan}</h4>
                     <h5><FaLocationDot /> iVitalize</h5>
                     <h6>a partir de</h6>
-                    <h2>R$ 199,90</h2>
+                    <h2>{price}</h2>
                     <div>Mensal</div>
                 </div>
                 <div className={styles.beneficios}>
@@ -53,7 +53,7 @@ export default function CardPlano({ onClick }) {
                     <p><IoCheckmarkCircleOutline /> Estacionamento preferencial.</p>
                     <p><IoCheckmarkCircleOutline /> Coqueteleira original GROWTH SUPLEMENTS.</p>
                 </div>
-                <div className={styles.buttonPlano}>
+                <div className={`${styles.buttonPlano} ${styles[`buttonPlano_${plan}`]}`}>
                     <button onClick={onClick}>
                         <span>MATRICULAR</span>
                     </button>
