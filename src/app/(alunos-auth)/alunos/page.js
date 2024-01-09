@@ -1,42 +1,42 @@
 'use client'
 
 import Navbar from "@/app/components/Navbar/Navbar";
-
 import { Poppins } from 'next/font/google'
 import styles from './page.module.css'
 import { IoIosSearch } from "react-icons/io";
 import Link from 'next/link'
-
 import { FaXmark } from "react-icons/fa6";
-
 import { motion } from 'framer-motion';
-
-import { useState, useContext } from "react";
-
+import { useState, useContext, useEffect } from "react";
 import { usePathname } from "next/navigation";
-
-import {CadastroContext} from '@/app/Context/CadastroState'
-
+import ReactPaginate from "react-paginate";
+import { CadastroContext } from '@/app/Context/CadastroState'
 import CardAluno from "@/app/components/CardAluno/CardAluno";
+import LoadingCadastro from "@/app/components/LoadingCadastro/LoadingCadastro";
+import { set } from "date-fns";
+
 const poppins = Poppins({
     subsets: ['latin'],
     weight: '500'
 })
 
 export default function Page() {
-
-    const {setFormData, setCepValidContext, setPhoto} = useContext(CadastroContext)
-
+    const [deleteCard, setDeleteCard] = useState(false)
+    const { setFormData, setCepValidContext, setPhoto } = useContext(CadastroContext)
+    const [itemsData, setItemsData] = useState([])
+    const [pageCount, setPageCount] = useState()
+    const [refresh, setRefresh] = useState(false)
     const pathRoute = usePathname();
 
-    if(pathRoute === '/alunos') {
+    if (pathRoute === '/alunos') {
         setFormData('')
         setCepValidContext('gray')
         setPhoto(null)
-        
+
+
     }
 
-    const [deleteCard, setDeleteCard] = useState(false)
+
 
     const deletingCard = (isDeleteclicked) => {
         setDeleteCard(isDeleteclicked);
@@ -46,10 +46,43 @@ export default function Page() {
         setDeleteCard(false)
     }
 
+    useEffect(() => {
+        setRefresh(true)
+        const getAlunos = async () => {
+
+            const res = await fetch('https://ivitalize-api.onrender.com/api/v1/students?page=1')
+            const data = await res.json()
+            const totalPages = Math.ceil(data.length / 16);
+            setPageCount(totalPages)
+            setItemsData(data)
+            setRefresh(false)
+        }
+
+        getAlunos()
+
+    }, [])
+
+    const getSelectedPage = async (currentPage) => {
+        setRefresh(true)
+        const res = await fetch(`https://ivitalize-api.onrender.com/api/v1/students?page=${currentPage}`)
+        const data = await res.json()
+
+
+        return data
+    }
+
+    const handlePageClick = async (data) => {
+        console.log(data.selected)
+        let currentPage = data.selected + 1
+
+        const newDataAluno = await getSelectedPage(currentPage);
+        setRefresh(false)
+        setItemsData(newDataAluno);
+    }
 
     return (
         <main className={`${poppins.className} ${styles.Main} ${deleteCard ? styles.overlay : ''}`} >
-            <Navbar/>
+            <Navbar />
             <div className={styles.barAlunos}>
                 <h1>ALUNOS</h1>
                 <div>
@@ -61,11 +94,39 @@ export default function Page() {
                 </div>
             </div>
             <hr></hr>
+
             <section className={styles.cardsAlunos}>
-                <CardAluno deleteCardAluno={deletingCard} />
-                <CardAluno deleteCardAluno={deletingCard} />
-                <CardAluno deleteCardAluno={deletingCard} />
+                {refresh ? (
+                    <LoadingCadastro />
+                ) : (
+                    <>
+                        {itemsData.map((item) => {
+                            return (
+                                <CardAluno key={item.id} deleteCardAluno={deletingCard} name={item.full_name} email={item.email} photo={item.photo} />
+                            )
+                        })}
+
+                    </>
+                )}
+                <div className={styles.paginateDiv}>
+                    {(pageCount) !== 1 && (
+                        <ReactPaginate
+                            previousLabel={'<<'}
+                            nextLabel={'>>'}
+                            breakLabel={'...'}
+                            pageCount={pageCount}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={3}
+                            onPageChange={handlePageClick}
+                            className={styles.PaginationClass}
+                            activeClassName={styles.activeLI}
+                        />
+                    )}
+                </div>
+
             </section>
+
+
             {deleteCard && (
                 <div className={styles.overlay}>
                     <motion.div
@@ -85,6 +146,7 @@ export default function Page() {
                         </div>
                     </motion.div>
                 </div>
+
 
             )}
         </main>

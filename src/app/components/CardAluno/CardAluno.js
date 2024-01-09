@@ -9,7 +9,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 
 import { useState } from 'react';
 
-export default function CardAluno({deleteCardAluno}) {
+export default function CardAluno({deleteCardAluno, name, email, photo}) {
 
     const [deleteCard, setDeleteCard] = useState(false)
 
@@ -25,15 +25,15 @@ export default function CardAluno({deleteCardAluno}) {
             <div className={styles.dataAluno}>
                 <div className={styles.alunoImg}>
                     <Image
-                        src={''}
+                        src={photo}
                         width={100}
                         height={100}
                         alt='AlunoPic'
                     />
                 </div>
                 <div className={styles.infoAluno}>
-                    <h4>Nome do Aluno</h4>
-                    <p>nome.aluno@gmail.com</p>
+                    <h4>{name}</h4>
+                    <p>{email}</p>
                 </div>
 
             </div>
