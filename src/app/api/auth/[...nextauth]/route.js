@@ -40,8 +40,6 @@ const nextAuthOptions = {
         } catch (error) {
         
           return error
-         
-      
         }
       },
     }),

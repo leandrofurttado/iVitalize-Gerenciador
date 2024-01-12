@@ -9,7 +9,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 
 import { useState } from 'react';
 
-export default function CardAluno({deleteCardAluno, name, email, photo}) {
+export default function CardAluno({deleteCardAluno, name, email, photo, EditAluno}) {
 
     const [deleteCard, setDeleteCard] = useState(false)
 
@@ -18,6 +18,7 @@ export default function CardAluno({deleteCardAluno, name, email, photo}) {
         setDeleteCard(true)
         deleteCardAluno(true)
     }
+
 
 
     return (
@@ -38,7 +39,7 @@ export default function CardAluno({deleteCardAluno, name, email, photo}) {
 
             </div>
             <div className={styles.buttons}>
-                <button className={styles.editButton}>Editar</button>
+                <button className={styles.editButton} onClick={EditAluno}>Editar</button>
                 <button className={styles.deleteButton} onClick={deletaAluno}><FaRegTrashCan /></button>
             </div>
         </div>

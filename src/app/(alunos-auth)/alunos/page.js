@@ -8,12 +8,14 @@ import Link from 'next/link'
 import { FaXmark } from "react-icons/fa6";
 import { motion } from 'framer-motion';
 import { useState, useContext, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import ReactPaginate from "react-paginate";
 import { CadastroContext } from '@/app/Context/CadastroState'
 import CardAluno from "@/app/components/CardAluno/CardAluno";
 import LoadingCadastro from "@/app/components/LoadingCadastro/LoadingCadastro";
-import { set } from "date-fns";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -27,13 +29,12 @@ export default function Page() {
     const [pageCount, setPageCount] = useState()
     const [refresh, setRefresh] = useState(false)
     const pathRoute = usePathname();
+    const router = useRouter()
 
     if (pathRoute === '/alunos') {
         setFormData('')
         setCepValidContext('gray')
         setPhoto(null)
-
-
     }
 
 
@@ -48,17 +49,23 @@ export default function Page() {
 
     useEffect(() => {
         setRefresh(true)
-        const getAlunos = async () => {
+        try{
+            const getAlunos = async () => {
 
-            const res = await fetch('https://ivitalize-api.onrender.com/api/v1/students?page=1')
-            const data = await res.json()
-            const totalPages = Math.ceil(data.length / 16);
-            setPageCount(totalPages)
-            setItemsData(data)
-            setRefresh(false)
+                const res = await fetch('https://ivitalize-api.onrender.com/api/v1/students?page=1')
+                const data = await res.json()
+                const totalPages = Math.ceil(data.length / 16);
+                setPageCount(totalPages)
+                setItemsData(data)
+                setRefresh(false)
+            }
+    
+            getAlunos()
+        }catch(err){
+            toast.error('Houve algum erro!')
+            redirect('/home')
         }
-
-        getAlunos()
+ 
 
     }, [])
 
@@ -78,6 +85,10 @@ export default function Page() {
         const newDataAluno = await getSelectedPage(currentPage);
         setRefresh(false)
         setItemsData(newDataAluno);
+    }
+
+    const editAluno = (idAluno) =>{
+        router.push(`/alunos/${idAluno}`)
     }
 
     return (
@@ -102,7 +113,7 @@ export default function Page() {
                     <>
                         {itemsData.map((item) => {
                             return (
-                                <CardAluno key={item.id} deleteCardAluno={deletingCard} name={item.full_name} email={item.email} photo={item.photo} />
+                                <CardAluno key={item.id} deleteCardAluno={deletingCard} name={item.full_name} email={item.email} photo={item.photo} EditAluno={() => editAluno(item.id)} />
                             )
                         })}
 

@@ -23,14 +23,14 @@ export default function Page() {
     const { formData, photo } = useContext(CadastroContext)
     const [loading, setLoading] = useState(false)
 
-/*     useEffect(() => {
+   useEffect(() => {
         const { full_name, first_name, email, cpf, phone, cep, birth_date, address, complement, house_number, gender, schedule, modality } = formData
         if (!full_name || !first_name || !email || !cpf, !phone, !cep, !birth_date || !address || !complement || !house_number || !gender || !schedule || !modality) {
             toast.warn('Todos os campos deverão ser preenchidos!')
             return router.back()
         }
 
-    }, [formData]); */
+    }, [formData]); 
 
 
 
