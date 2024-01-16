@@ -151,3 +151,39 @@
     background-color: #78f69c;
     color: #FFF;
 }
+
+.editionButton{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 500px;
+}
+
+.editionButton button{
+    text-decoration: none;
+    color: black;
+    border-radius: 10px;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    background-color: #80d798;
+    cursor: pointer;
+    transition: .4s;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.editionButton button:hover{
+    background-color: #78f69c;
+    color: #FFF;
+}
+
+.editionButton svg{
+    margin-left: 15px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.editionButton svg:hover{
+    background-color: lightcoral;
+}
