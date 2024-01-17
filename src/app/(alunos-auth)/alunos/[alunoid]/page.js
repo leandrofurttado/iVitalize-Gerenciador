@@ -23,6 +23,7 @@ export default function alunoid({ params }) {
     const { formData, setFormData, cepValidContext, setCepValidContext } = useContext(CadastroContext)
     const [refresh, setRefresh] = useState(true)
     const [disabledInput, setDisabledInput] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const [dataAluno, setDataAluno] = useState([])
     const [oldArray, setOldArray] = useState(true)
     const [oldAluno, setOldAluno] = useState([])
@@ -41,7 +42,7 @@ export default function alunoid({ params }) {
                 const data = await res.json()
 
                 if (res.ok) {
-                    setRefresh(false)
+                    setRefresh(!refresh)
                     setDataAluno(data)
                     setOldAluno(data)
 
@@ -50,7 +51,7 @@ export default function alunoid({ params }) {
             } catch (err) {
                 router.back()
                 toast.error('Ocorreu algum erro!')
-                setRefresh(false)
+                setRefresh(!refresh)
 
             }
 
@@ -350,15 +351,60 @@ export default function alunoid({ params }) {
             ...prevdataAluno,
             photo: null,
         }))
-        
+
     }
 
 
-    const handleFormCadastro = () => {
+    const handleFormCadastro = async () => {
         if (validateInputs()) {
+            setIsLoading(true)
+            try {
+                const response = await fetch(`https://ivitalize-api.onrender.com/api/v1/students/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        full_name: dataAluno.full_name,
+                        first_name: dataAluno.first_name,
+                        email: dataAluno.email,
+                        cpf: dataAluno.cpf,
+                        birth_date: dataAluno.birth_date,
+                        gender: dataAluno.gender,
+                        phone: [
+                            dataAluno.phone
+                        ],
+                        schedule: dataAluno.schedule,
+                        modality: dataAluno.modality,
+                        address: dataAluno.address,
+                        cep: dataAluno.cep,
+                        neighborhood: dataAluno.neighborhood,
+                        photo: dataAluno.photo
+                    }),
+                })
 
-            console.log('Tudo, ok!', dataAluno)
-            // Adicione aqui a lógica para prosseguir com o cadastro
+                const data = await response.json()
+
+                if (response.ok) {
+                    setIsLoading(false)
+                    setDisabledInput(!disabledInput)
+                    console.log(data)
+                    toast.success("Aluno atualizado com sucesso!")
+
+
+                }
+
+
+            } catch (error) {
+                setDisabledInput(!disabledInput)
+                setIsLoading(false)
+                console.log(error)
+                setRefresh(!refresh)
+                toast.error("Ocorreu algum erro, tente novamente!")
+
+
+
+            }
         } else {
             console.log("Inconformidades nos campos", dataAluno)
             toast.error('Verifique os campos e tente novamente!')
@@ -453,7 +499,7 @@ export default function alunoid({ params }) {
     const handleEditFormCancel = () => {
         setDisabledInput(!disabledInput)
         setOldArray(true)
-    
+
 
     }
 
@@ -478,6 +524,9 @@ export default function alunoid({ params }) {
                     <h1>EDIÇÃO</h1>
                     <Link href='/alunos'>Voltar</Link>
                 </div>
+                {isLoading && (
+                    <LoadingCadastro />
+                )}
                 <div className={styles.editionButton}>
                     {disabledInput && (
                         <button onClick={handleEditForm} >Editar</button>
@@ -487,8 +536,8 @@ export default function alunoid({ params }) {
                         <LiaWindowClose onClick={handleEditFormCancel} />
                     )}{
                     }
-
                 </div>
+
                 <div className={styles.containerInfos}>
                     <div className={styles.containerUserImg}>
                         <div className={styles.userImage}>
@@ -497,7 +546,7 @@ export default function alunoid({ params }) {
                                 height={200}
                                 width={200}
                                 alt='userImage'
-                                
+
                             />
                         </div>
                         {!disabledInput && (
