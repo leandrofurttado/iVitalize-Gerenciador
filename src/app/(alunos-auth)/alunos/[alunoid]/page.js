@@ -511,6 +511,8 @@ export default function alunoid({ params }) {
         } else {
             return '/images/userDefault.png'
         }
+
+        
     }
 
 
@@ -542,7 +544,7 @@ export default function alunoid({ params }) {
                     <div className={styles.containerUserImg}>
                         <div className={styles.userImage}>
                             <Image
-                                src={verifyImage()}
+                                src={verifyImage() ? verifyImage() : '/images/userDefault.png'}
                                 height={200}
                                 width={200}
                                 alt='userImage'

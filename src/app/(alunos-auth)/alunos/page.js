@@ -15,6 +15,7 @@ import CardAluno from "@/app/components/CardAluno/CardAluno";
 import LoadingCadastro from "@/app/components/LoadingCadastro/LoadingCadastro";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { set } from "date-fns";
 
 
 const poppins = Poppins({
@@ -28,6 +29,8 @@ export default function Page() {
     const [itemsData, setItemsData] = useState([])
     const [pageCount, setPageCount] = useState()
     const [refresh, setRefresh] = useState(false)
+    const [alunoID, setAlunoID] = useState(null)
+    const [alunoDelete, setAlunoDelete] = useState(false)
     const pathRoute = usePathname();
     const router = useRouter()
 
@@ -39,33 +42,36 @@ export default function Page() {
 
 
 
-    const deletingCard = (isDeleteclicked) => {
-        setDeleteCard(isDeleteclicked);
+    const deletingCard = async (idAluno) => {
+        setAlunoID(idAluno)
+        closeDeleteCard();
     };
 
+
+
     const closeDeleteCard = () => {
-        setDeleteCard(false)
+        setDeleteCard(!deleteCard)
     }
 
     useEffect(() => {
         setRefresh(true)
-        try{
+        try {
             const getAlunos = async () => {
 
                 const res = await fetch('https://ivitalize-api.onrender.com/api/v1/students?page=1')
                 const data = await res.json()
-                const totalPages = Math.ceil(data.length / 16);
+                let totalPages = Math.ceil(data.length / 16);
                 setPageCount(totalPages)
                 setItemsData(data)
                 setRefresh(false)
             }
-    
+
             getAlunos()
-        }catch(err){
+        } catch (err) {
             toast.error('Houve algum erro!')
             redirect('/home')
         }
- 
+
 
     }, [])
 
@@ -87,9 +93,39 @@ export default function Page() {
         setItemsData(newDataAluno);
     }
 
-    const editAluno = (idAluno) =>{
+    const editAluno = (idAluno) => {
         router.push(`/alunos/${idAluno}`)
     }
+
+    const deleteAluno = async () => {
+        closeDeleteCard()
+        console.log(alunoID, ' aluno id')
+        let alunoIdDelete = alunoID;
+        try {
+            
+            const response = await fetch(`https://ivitalize-api.onrender.com/api/v1/students/${alunoIdDelete}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': "application/json"
+                }
+            })
+
+
+            if (response.ok) {
+                toast.success('Aluno excluído com sucesso!')
+                router.push('/')
+            }
+
+        } catch (err) {
+            console.log(err)
+            toast.error('Ocorreu um erro, tente novamente mais tarde!')
+        }
+
+
+    }
+
+
+
 
     return (
         <main className={`${poppins.className} ${styles.Main} ${deleteCard ? styles.overlay : ''}`} >
@@ -113,14 +149,14 @@ export default function Page() {
                     <>
                         {itemsData.map((item) => {
                             return (
-                                <CardAluno key={item.id} deleteCardAluno={deletingCard} name={item.full_name} email={item.email} photo={item.photo} EditAluno={() => editAluno(item.id)} />
+                                <CardAluno key={item.id} deleteCardAluno={() => deletingCard(item.id)} name={item.full_name} email={item.email} photo={item.photo ? item.photo : ''} EditAluno={() => editAluno(item.id)} />
                             )
                         })}
 
                     </>
                 )}
                 <div className={styles.paginateDiv}>
-                    {(pageCount) !== 1 && (
+                    {pageCount > 1 && (
                         <ReactPaginate
                             previousLabel={'<<'}
                             nextLabel={'>>'}
@@ -151,7 +187,7 @@ export default function Page() {
                             </div>
                             <h4>Você realmente deseja excluir esse aluno?</h4>
                             <div className={styles.ButtonsDeleteDiv}>
-                                <button className={styles.deleteBtnAluno}>Sim</button>
+                                <button className={styles.deleteBtnAluno} onClick={deleteAluno}>Sim</button>
                                 <button className={styles.CanceldeleteBtnAluno} onClick={closeDeleteCard} >Não</button>
                             </div>
                         </div>
