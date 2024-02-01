@@ -307,6 +307,7 @@ export default function Page() {
     };
 
     const handleClearImage = (e) => {
+        document.getElementById('imageUser').value = ""
         setPhoto(null)
     }
 
@@ -342,6 +343,7 @@ export default function Page() {
                             type='file'
                             accept='image/*'
                             onChange={handleImageSelect}
+                            id='imageUser'
 
                         />
                     </div>
