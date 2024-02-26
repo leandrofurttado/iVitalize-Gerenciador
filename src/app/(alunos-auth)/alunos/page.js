@@ -64,6 +64,8 @@ export default function Page() {
                 setPageCount(totalPages)
                 setItemsData(data)
                 setRefresh(false)
+
+                
             }
 
             getAlunos()
@@ -98,6 +100,7 @@ export default function Page() {
     }
 
     const deleteAluno = async () => {
+        setRefresh(true);
         closeDeleteCard()
         console.log(alunoID, ' aluno id')
         let alunoIdDelete = alunoID;
@@ -113,7 +116,9 @@ export default function Page() {
 
             if (response.ok) {
                 toast.success('Aluno excluído com sucesso!')
-                router.push('/')
+                const posDelete = await getSelectedPage(1)
+                setItemsData(posDelete);
+                setRefresh(false);
             }
 
         } catch (err) {
