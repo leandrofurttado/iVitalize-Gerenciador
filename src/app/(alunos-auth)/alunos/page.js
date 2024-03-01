@@ -30,6 +30,7 @@ export default function Page() {
     const [pageCount, setPageCount] = useState()
     const [refresh, setRefresh] = useState(false)
     const [alunoID, setAlunoID] = useState(null)
+    const [search, setSearch] = useState(null)
     const [alunoDelete, setAlunoDelete] = useState(false)
     const pathRoute = usePathname();
     const router = useRouter()
@@ -65,7 +66,7 @@ export default function Page() {
                 setItemsData(data)
                 setRefresh(false)
 
-                
+
             }
 
             getAlunos()
@@ -105,7 +106,7 @@ export default function Page() {
         console.log(alunoID, ' aluno id')
         let alunoIdDelete = alunoID;
         try {
-            
+
             const response = await fetch(`https://ivitalize-api.onrender.com/api/v1/students/${alunoIdDelete}`, {
                 method: 'DELETE',
                 headers: {
@@ -129,6 +130,40 @@ export default function Page() {
 
     }
 
+    const searchAluno = async () => {
+        if (search === null) {
+            toast.warning("Você deve preencher o campo de pesquisa")
+        } else {
+
+            try{
+                setRefresh(true);
+                const response = await fetch(`https://ivitalize-api.onrender.com/api/v1/students?search=${search}`, {
+                    method: 'GET',
+                    headers:{
+                        'Content-Type': 'application/json'
+                    }
+                })
+
+                const data = await response.json()
+
+                if(response.ok){
+                    setItemsData(data)
+                    setRefresh(false);
+                }else{
+                    setRefresh(false);
+                    toast.error('Aluno não encontrado!')
+                }
+
+            }catch(err){
+                setRefresh(false);
+                console.log(err)
+                toast.error("Ocorreu um erro, tente novamente")
+            }
+
+
+        }
+    }
+
 
 
 
@@ -137,9 +172,11 @@ export default function Page() {
             <Navbar />
             <div className={styles.barAlunos}>
                 <h1>ALUNOS</h1>
-                <div>
-                    <label><IoIosSearch /></label>
-                    <input></input>
+                <div className={styles.containerInput}>
+                    <div className={styles.searchInput}>
+                        <input type="text" placeholder="Pesquisar"  onChange={(e) => { setSearch(e.target.value) }} />
+                        <span><IoIosSearch onClick={searchAluno} /></span>
+                    </div>
                     <button>
                         <Link href='/alunos/cadastro'> Cadastrar Aluno</Link>
                     </button>
