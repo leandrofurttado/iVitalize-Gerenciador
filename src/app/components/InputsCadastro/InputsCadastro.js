@@ -11,7 +11,7 @@ export default function InputsCadastro({ name, length, placeholder, type, select
             )}
             {select == 'sexo' && (
                 <select className={`${styles.input} ${styles['input_' + length]}`} value={value} onChange={onChange} style={style} disabled={disabled}>
-                    <option value={null} ></option>
+                    <option value={null} >Selecione</option>
                     <option value={'male'} >Masculino</option>
                     <option value={'female'} >Feminino</option>
                     <option value={'other'}>Outro</option>
@@ -19,7 +19,7 @@ export default function InputsCadastro({ name, length, placeholder, type, select
             )}
             {select === 'horario' && (
                 <select className={`${styles.input} ${styles['input_' + length]}`} value={value} onChange={onChange} style={style} disabled={disabled}>
-                    <option value={null} ></option>
+                    <option value={null} >Selecione</option>
                     <option value={0}>Manhã</option>
                     <option value={1}>Tarde</option>
                     <option value={2}>Noite</option>
@@ -27,7 +27,7 @@ export default function InputsCadastro({ name, length, placeholder, type, select
             )}
             {select === 'modalidade' && (
                 <select className={`${styles.input} ${styles['input_' + length]}`} value={value} onChange={onChange} style={style} disabled={disabled}>
-                    <option value={null} ></option>
+                    <option value={null} >Selecione</option>
                     <option value={0}>Musculação</option>
                     <option value={1}>Crossfit</option>
                     <option value={2}>Luta</option>
@@ -36,8 +36,14 @@ export default function InputsCadastro({ name, length, placeholder, type, select
                     <option value={5}>Outros</option>
                 </select>
             )}
-
-
+                        {select === 'cref' && (
+                <select className={`${styles.input} ${styles['input_' + length]}`} value={value} onChange={onChange} style={style} disabled={disabled} >
+                    <option value={null} >Selecione</option>
+                    <option value={true}>Sim</option>
+                    <option value={false}>Não</option>
+                    
+                </select>
+            )}
         </div>
     )
 }
