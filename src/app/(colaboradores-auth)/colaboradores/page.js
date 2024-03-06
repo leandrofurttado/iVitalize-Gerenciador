@@ -13,13 +13,13 @@ const poppins = Poppins({
 
 export default function Page(){
     //PUXA DADOS RETORNADOS PÓS LOGIN
-    const { data } = useSession();
+    /* const { data } = useSession(); */
     
   
     return (
         <main className={poppins.className}>
             <Navbar/>
-            <p>COLABORADORES {data.user.name}</p>
+            {/* <p>COLABORADORES {data.user.name}</p> */}
             <Link href={"/personais/cadastro"}>Cadastro de Personais</Link>
         </main>
     )

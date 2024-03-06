@@ -300,6 +300,7 @@ export default function Page() {
 
         reader.onload = () => {
             setPhoto(reader.result);
+            console.log(photo)
         };
 
         reader.readAsDataURL(selectedImage);

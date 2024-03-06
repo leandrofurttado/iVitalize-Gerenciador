@@ -8,7 +8,7 @@
     margin: 0 350px
 }
 
-.barAlunos{
+.barPersonal{
     height: 120px;
     display: flex;
     align-items: center;
@@ -17,7 +17,7 @@
     
 }
 
-.barAlunos a{
+.barPersonal a{
     height: 30px;
     width: 65px;
     padding: 0.2em 0;
@@ -30,7 +30,7 @@
     transition: .4s;
 }
 
-.barAlunos a:hover{
+.barPersonal a:hover{
     background-color: #80d798;
 }
 
@@ -102,7 +102,7 @@
     color: #FFF;
 }
 
-.inputsAluno{
+.inputsPersonal{
     height: 100%;
     width: 1000px;
     margin-top: 5px;
@@ -148,7 +148,6 @@
 }
 
 .nextStep button:hover{
-    background-color: #78f69c;
     color: #FFF;
 }
 

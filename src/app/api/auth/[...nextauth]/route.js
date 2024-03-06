@@ -1,5 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { redirect } from "next/dist/server/api-utils";
+import { toast } from "react-toastify";
 
 const token = process.env.API_TOKEN;
 
@@ -31,8 +33,17 @@ const nextAuthOptions = {
 
           const data = await response.json();
            
-          if(response.ok && !data.error){
-            return data
+            const timedOut = () =>{
+              toast.error("Ocorreu um erro, tente novamente!")
+              redirect('/')
+            }
+
+          if(response.ok){
+            setTimeout(timedOut, 15000)
+            if(!data.error){
+              return data
+            }
+            
           }
 
           return
