@@ -1,0 +1,197 @@
+
+.Main{
+    height: 100vh;
+}
+
+.Main hr{
+    border-bottom: 1px solid #ccc;
+    margin: 0 350px
+}
+
+.barPersonal{
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3em;
+    
+}
+
+.barPersonal a{
+    height: 30px;
+    width: 65px;
+    padding: 0.2em 0;
+    text-align: center;
+    text-decoration: none;
+    transition: .4s;
+    color: black;
+    border-radius: 10px;
+    background-color: rgb(243, 243, 243);
+    transition: .4s;
+}
+
+.barPersonal a:hover{
+    background-color: #80d798;
+}
+
+.containerInfos{
+    display: flex;
+    height: 350px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px 60px;
+
+}
+
+.containerUserImg{
+    height: 100%;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    flex-direction: column;
+    
+}
+
+.userImage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    
+}
+
+.userImage img{
+    border-radius: 50%;
+}
+
+.buttonsImage{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 170px;
+    align-items: start;
+    padding-left: 30px;
+  
+}
+
+
+
+
+
+.btnAdd:hover{
+    background-color: #84e8a1;
+    color: #FFF;
+}
+
+.btnRemove{
+    height: 22px;
+    width: 80px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #d32815;
+    transition: .4s;
+}
+
+.btnRemove:hover{
+    background-color: #e64439;
+    color: #FFF;
+}
+
+.inputsPersonal{
+    height: 100%;
+    width: 1000px;
+    margin-top: 5px;
+    margin-right: 500px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.localization{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    height: 130px;
+    width: 700px;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-left: 360px;
+   
+}
+
+.nextStep{
+    display: flex;
+    margin-top: 150px;
+    align-items: center;
+    justify-content: end;
+}
+
+.nextStep button{
+    text-decoration: none;
+    color: black;
+    margin-right: 250px;
+    border-radius: 10px;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    padding: 0.2em;
+    background-color: #80d798;
+    cursor: pointer;
+    transition: .4s;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.nextStep button:hover{
+    color: #FFF;
+}
+
+.crefInput{
+    width: 200px;
+    height: 30px;
+    border-radius: 20px;
+    background-color: #eee;
+    padding-left: 10px;
+    margin-right: 12px;
+}
+
+.editionButton{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 500px;
+}
+
+.editionButton button{
+    text-decoration: none;
+    color: black;
+    border-radius: 10px;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    background-color: #80d798;
+    cursor: pointer;
+    transition: .4s;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.editionButton button:hover{
+    background-color: #78f69c;
+    color: #FFF;
+}
+
+.editionButton svg{
+    margin-left: 15px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.editionButton svg:hover{
+    background-color: lightcoral;
+}

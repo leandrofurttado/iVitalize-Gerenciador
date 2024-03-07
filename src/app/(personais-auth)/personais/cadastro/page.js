@@ -6,9 +6,10 @@ import InputsCadastro from '@/app/components/InputsCadastro/InputsCadastro'
 import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
 import { CadastroContext } from '@/app/Context/CadastroState'
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { format, addYears } from 'date-fns';
 import { toast } from 'react-toastify'
+import LoadingCadastro from '@/app/components/LoadingCadastro/LoadingCadastro'
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -20,6 +21,9 @@ export default function personalCadastro() {
     const [formPersonal, setFormPersonal] = useState('')
     const [crefControl, setCrefControl] = useState(null)
     const [photo, setPhoto] = useState(null)
+    const [loading, setLoading] = useState(false)
+
+    const router = useRouter()
 
     //Coleta a data atual para travar o input de data de nascimento até o ano atual
     function getDateLimits() {
@@ -119,26 +123,26 @@ export default function personalCadastro() {
     };
 
     //Valida CEP
-    const validateCEP = async (cep) =>{
+    const validateCEP = async (cep) => {
 
-        if(cep.length < 8 ){
- 
+        if (cep.length < 8) {
+
             return false
         }
 
         const verifyCep = cep
-        const response = await fetch(`http://viacep.com.br/ws/${verifyCep}/json/`,{
+        const response = await fetch(`http://viacep.com.br/ws/${verifyCep}/json/`, {
             method: 'GET',
         })
 
         const data = await response.json()
 
-        if(response.ok){
+        if (response.ok) {
 
-            setFormPersonal((prevForm) =>({
+            setFormPersonal((prevForm) => ({
                 ...prevForm,
-                ['address'] : `${data.logradouro} - ${data.uf}`,
-                ['neighborhood'] : data.bairro
+                ['address']: `${data.logradouro} - ${data.uf}`,
+                ['neighborhood']: data.bairro
             }))
 
             return true
@@ -148,45 +152,45 @@ export default function personalCadastro() {
 
 
     //Validação Form CSS
-    const validateInput = (field, value) =>{
+    const validateInput = (field, value) => {
 
-        if(value === '' || value === undefined){
+        if (value === '' || value === undefined) {
             return '#ccc'
         }
 
-        if(field === 'cep' && validateCEP(value) && value.length === 8){
+        if (field === 'cep' && validateCEP(value) && value.length === 8) {
             return 'lightgreen'
         }
 
-        if(field === 'email' && validateEmail(value)){
+        if (field === 'email' && validateEmail(value)) {
             return 'lightgreen'
         }
 
-        if(field === 'cpf' && validateCPF(value)){
+        if (field === 'cpf' && validateCPF(value)) {
             return 'lightgreen'
         }
 
-        if(field === 'phone' && validatePhone(value)){
+        if (field === 'phone' && validatePhone(value)) {
             return 'lightgreen'
         }
 
-        if(field === 'gender' && value!== undefined && value !== 'Selecione'){
+        if (field === 'gender' && value !== undefined && value !== 'Selecione') {
             return 'lightgreen'
         }
 
-        if( field === 'has_cref' && crefControl !== undefined && crefControl !== 'Selecione'){
+        if (field === 'has_cref' && crefControl !== undefined && crefControl !== 'Selecione') {
             return 'lightgreen'
         }
 
-        if(field === 'cref' && value!== undefined && value!== '' && value.length === 11){
+        if (field === 'cref' && value !== undefined && value !== '' && value.length === 11) {
             return 'lightgreen'
         }
-        
+
         if (field === 'house_number' && value.length >= 1) {
             return 'lightgreen'
         }
 
-        if((field === 'full_name' || field === "first_name" || field === 'birth_date' || field === 'specialization' || field==='complement' || field==='address'  || field === 'neighborhood') && value !== undefined && value !== '' && value.length >= 3){
+        if ((field === 'full_name' || field === "first_name" || field === 'birth_date' || field === 'specialization' || field === 'complement' || field === 'address' || field === 'neighborhood') && value !== undefined && value !== '' && value.length >= 3) {
             return 'lightgreen'
         }
 
@@ -202,11 +206,11 @@ export default function personalCadastro() {
 
         reader.onload = () => {
             setPhoto(reader.result);
-            
+
 
             setFormPersonal((prevForm) => ({
                 ...prevForm,
-                ['photo'] : reader.result
+                ['photo']: reader.result
             }))
 
         };
@@ -223,7 +227,7 @@ export default function personalCadastro() {
         document.getElementById('imageUser').value = ""
         setFormPersonal((prevForm) => ({
             ...prevForm,
-            ['photo'] : null
+            ['photo']: null
         }))
         setPhoto(null)
     }
@@ -244,7 +248,7 @@ export default function personalCadastro() {
             }
         }
 
-        if(
+        if (
             validateInput('full_name', formPersonal['full_name']) === 'lightgreen' &&
             validateInput('first_name', formPersonal['first_name']) === 'lightgreen' &&
             validateInput('email', formPersonal['email']) === 'lightgreen' &&
@@ -254,44 +258,90 @@ export default function personalCadastro() {
             validateInput('phone', formPersonal['phone']) === 'lightgreen' &&
             validateInput('has_cref', formPersonal['has_cref']) === 'lightgreen' &&
             validateInput('cep', formPersonal['cep']) === 'lightgreen' &&
-            validateInput('specialization', formPersonal['specialization']) === 'lightgreen' && 
+            validateInput('specialization', formPersonal['specialization']) === 'lightgreen' &&
             validateInput('address', formPersonal['address']) === 'lightgreen' &&
             validateInput('neighborhood', formPersonal['neighborhood']) === 'lightgreen' &&
             validateInput('complement', formPersonal['complement']) === 'lightgreen' &&
-            validateInput('house_number', formPersonal['house_number']) === 'lightgreen' 
-            
+            validateInput('house_number', formPersonal['house_number']) === 'lightgreen'
 
-             
-        ){
+
+
+        ) {
             return true
         }
 
-       return false
-    
+        return false
+
     };
 
     //Lida com o envio do formulário
-    const handleFormPersonal = (e) => {
+    const handleFormPersonal = async (e) => {
         e.preventDefault()
-        if(validateForm()){
+        if (validateForm()) {
+            setLoading(true)
+            const response = await fetch("https://ivitalize-api.onrender.com/api/v1/personals", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    full_name: formPersonal.full_name,
+                    first_name: formPersonal.first_name,
+                    email: formPersonal.email,
+                    cpf: formPersonal.cpf,
+                    birth_date: formPersonal.birth_date,
+                    gender: formPersonal.gender,
+                    phone: [
+                        formPersonal.phone
+                    ],
+                    address: formPersonal.address,
+                    house_number: formPersonal.house_number,
+                    cep: formPersonal.cep,
+                    neighborhood: formPersonal.neighborhood,
+                    has_cref: formPersonal.has_cref,
+                    cref: formPersonal.cref,
+                    specialization: formPersonal.specialization,
+                    complement: formPersonal.complement,
+                    photo: formPersonal.photo
+                }),
+            })
+
+            const data = await response.json()
+
+            if (response.ok) {
+                if (data) {
+                    setLoading(false)
+                    toast.success("Personal criado com sucesso!")
+                    router.replace("/colaboradores")
+                }
+
+            } else {
+                setLoading(false)
+                toast.error("Ocorreu um erro, tente novamente")
+            }
 
             return console.log('FORM CORRETO!')
-        }else{
+        } else {
             toast.error("Campos não preenchidos ou inválidos")
             return console.log('Form INCORRETO')
         }
-    
+
     }
 
 
 
     return (
         <main className={`${poppins.className} ${styles.Main}`}>
-            <div className={styles.barPersonal}>
+            {loading && (
+                <LoadingCadastro></LoadingCadastro>
+            )}
+            {!loading && (
+                <>
+                               <div className={styles.barPersonal}>
                 <h1>CADASTRO PERSONAL</h1>
                 <Link href='/colaboradores'>Voltar</Link>
             </div>
-            <form onSubmit={handleFormPersonal} >
+            <form>
                 <div className={styles.containerInfos}>
                     <div className={styles.containerUserImg}>
                         <div className={styles.userImage}>
@@ -314,32 +364,35 @@ export default function personalCadastro() {
                     </div>
 
                     <div className={styles.inputsPersonal}>
-                        <InputsCadastro name='Nome Completo' length='medium' placeholder='Ex: Maria Soares da Silva' type='text' max={40} onChange={(e) => dataPersonal('full_name', e.target.value)} style={{ border: ` 2px solid ${validateInput('full_name', formPersonal['full_name'])}` }}/>
-                        <InputsCadastro name='Primeiro Nome' length='small' type='text' placeholder='Ex: Maria' max={10} onChange={(e) => dataPersonal('first_name', e.target.value)} style={{ border: ` 2px solid ${validateInput('first_name', formPersonal['first_name'])}` }}/>
-                        <InputsCadastro name='Email' length='large' type='email' placeholder='Ex: example@example.com' maxLength={40} onChange={(e) => dataPersonal('email', e.target.value)} style={{ border: ` 2px solid ${validateInput('email', formPersonal['email'])}` }}/>
+                        <InputsCadastro name='Nome Completo' length='medium' placeholder='Ex: Maria Soares da Silva' type='text' max={40} onChange={(e) => dataPersonal('full_name', e.target.value)} style={{ border: ` 2px solid ${validateInput('full_name', formPersonal['full_name'])}` }} />
+                        <InputsCadastro name='Primeiro Nome' length='small' type='text' placeholder='Ex: Maria' max={10} onChange={(e) => dataPersonal('first_name', e.target.value)} style={{ border: ` 2px solid ${validateInput('first_name', formPersonal['first_name'])}` }} />
+                        <InputsCadastro name='Email' length='large' type='email' placeholder='Ex: example@example.com' maxLength={40} onChange={(e) => dataPersonal('email', e.target.value)} style={{ border: ` 2px solid ${validateInput('email', formPersonal['email'])}` }} />
                         <InputsCadastro name='CPF' length='medium' maxLength={11} type='text' placeholder='Ex: 000.000.000-00' onChange={(e) => dataPersonal('cpf', e.target.value)} style={{ border: ` 2px solid ${validateInput('cpf', formPersonal['cpf'])}` }} />
-                        <InputsCadastro name='Data de Nascimento' type='date' placeholder='00/00/0000' max={formattedCurrentDate} min={formattedMinDate} onChange={(e) => dataPersonal('birth_date', e.target.value)} style={{ border: ` 2px solid ${validateInput('birth_date', formPersonal['birth_date'])}` }}/>
-                        <InputsCadastro name='Sexo' length='small' type='select' select='sexo' onChange={(e) => dataPersonal('gender', e.target.value)} style={{ border: ` 2px solid ${validateInput('gender', formPersonal['gender'])}` }}/>
-                        <InputsCadastro name='Telefone' type='tel' maxLength={11} placeholder='(00) 000000000' onChange={(e) => dataPersonal('phone', e.target.value)} style={{ border: ` 2px solid ${validateInput('phone', formPersonal['phone'])}` }}/>
-                        <InputsCadastro name='Possui CREF?' type='select' select='cref' value={crefControl} onChange={(e) => crefController('has_cref', e.target.value)} style={{ border: ` 2px solid ${validateInput('has_cref', formPersonal['has_cref'])}` }}/>
+                        <InputsCadastro name='Data de Nascimento' type='date' placeholder='00/00/0000' max={formattedCurrentDate} min={formattedMinDate} onChange={(e) => dataPersonal('birth_date', e.target.value)} style={{ border: ` 2px solid ${validateInput('birth_date', formPersonal['birth_date'])}` }} />
+                        <InputsCadastro name='Sexo' length='small' type='select' select='sexo' onChange={(e) => dataPersonal('gender', e.target.value)} style={{ border: ` 2px solid ${validateInput('gender', formPersonal['gender'])}` }} />
+                        <InputsCadastro name='Telefone' type='tel' maxLength={11} placeholder='(00) 000000000' onChange={(e) => dataPersonal('phone', e.target.value)} style={{ border: ` 2px solid ${validateInput('phone', formPersonal['phone'])}` }} />
+                        <InputsCadastro name='Possui CREF?' type='select' select='cref' value={crefControl} onChange={(e) => crefController('has_cref', e.target.value)} style={{ border: ` 2px solid ${validateInput('has_cref', formPersonal['has_cref'])}` }} />
                         {(crefControl === 'true') && (
-                            <InputsCadastro name='CREF' length='medium' maxLength={11} type='text' placeholder='Ex: 000.000.000-00' onChange={(e) => dataPersonal('cref', e.target.value)} style={{ border: ` 2px solid ${validateInput('cref', formPersonal['cref'])}` }}/>
+                            <InputsCadastro name='CREF' length='medium' maxLength={11} type='text' placeholder='Ex: 000.000.000-00' onChange={(e) => dataPersonal('cref', e.target.value)} style={{ border: ` 2px solid ${validateInput('cref', formPersonal['cref'])}` }} />
                         )}
-                        <InputsCadastro name='Especialização' length='medium' type='text' placeholder='Ex: Luta' max={20} onChange={(e) => dataPersonal('specialization', e.target.value)} style={{ border: ` 2px solid ${validateInput('specialization', formPersonal['specialization'])}` }}/>
+                        <InputsCadastro name='Especialização' length='medium' type='text' placeholder='Ex: Luta' max={20} onChange={(e) => dataPersonal('specialization', e.target.value)} style={{ border: ` 2px solid ${validateInput('specialization', formPersonal['specialization'])}` }} />
                     </div>
                 </div>
                 <hr></hr>
                 <div className={styles.localization}>
-                    <InputsCadastro name='Endereco' type='text' value={formPersonal['address']} length='biggest' placeholder='Ex: Rua exemple' onChange={(e) => dataPersonal('address', e.target.value)} style={{ border: ` 2px solid ${validateInput('address', formPersonal['address'])}` }}/>
-                    <InputsCadastro name='CEP' type='text' step={1} maxLength={8} placeholder='Ex: 12345-678' onChange={(e) => dataPersonal('cep', e.target.value)} style={{ border: ` 2px solid ${validateInput('cep', formPersonal['cep'])}` }}/>
-                    <InputsCadastro name='Bairro' type='text' value={formPersonal['neighborhood']} placeholder='Ex: Example' onChange={(e) => dataPersonal('neighborhood', e.target.value)} style={{ border: ` 2px solid ${validateInput('neighborhood', formPersonal['neighborhood'])}` }}/>
-                    <InputsCadastro name='Complemento' type='text' placeholder='Ex: Casa' onChange={(e) => dataPersonal('complement', e.target.value)} style={{ border: ` 2px solid ${validateInput('complement', formPersonal['complement'])}` }}/>
-                    <InputsCadastro name='Número' type='text' placeholder='Ex: 32' onChange={(e) => dataPersonal('house_number', e.target.value)} style={{ border: ` 2px solid ${validateInput('house_number', formPersonal['house_number'])}` }}/>
+                    <InputsCadastro name='Endereco' type='text' value={formPersonal['address']} length='biggest' placeholder='Ex: Rua exemple' onChange={(e) => dataPersonal('address', e.target.value)} style={{ border: ` 2px solid ${validateInput('address', formPersonal['address'])}` }} />
+                    <InputsCadastro name='CEP' type='text' step={1} maxLength={8} placeholder='Ex: 12345-678' onChange={(e) => dataPersonal('cep', e.target.value)} style={{ border: ` 2px solid ${validateInput('cep', formPersonal['cep'])}` }} />
+                    <InputsCadastro name='Bairro' type='text' value={formPersonal['neighborhood']} placeholder='Ex: Example' onChange={(e) => dataPersonal('neighborhood', e.target.value)} style={{ border: ` 2px solid ${validateInput('neighborhood', formPersonal['neighborhood'])}` }} />
+                    <InputsCadastro name='Complemento' type='text' placeholder='Ex: Casa' onChange={(e) => dataPersonal('complement', e.target.value)} style={{ border: ` 2px solid ${validateInput('complement', formPersonal['complement'])}` }} />
+                    <InputsCadastro name='Número' type='text' placeholder='Ex: 32' onChange={(e) => dataPersonal('house_number', e.target.value)} style={{ border: ` 2px solid ${validateInput('house_number', formPersonal['house_number'])}` }} />
                 </div>
                 <div className={styles.nextStep}>
-                    <button type='submit'>Cadastrar</button>
+                    <button onClick={handleFormPersonal}>Cadastrar</button>
                 </div>
             </form>
+                </>
+            )}
+ 
         </main>
     )
 }

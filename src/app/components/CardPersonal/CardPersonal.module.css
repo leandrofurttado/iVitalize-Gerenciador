@@ -1,0 +1,289 @@
+.cardContainer{
+    width: 95%;
+    height: 170px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 0 1em;
+}
+
+
+
+.dataPersonal{
+  
+    width: 350px;
+    display: flex;
+    align-items: center;
+}
+
+.infoPersonal h4{
+    margin-bottom: .2em;
+}
+
+.PersonalImg{
+    background-color: #ddd;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    margin-right: 1em;
+}
+
+.PersonalImg img{
+    border-radius: 100%;
+}
+
+.buttons{
+    display: flex;
+
+}
+
+.editButton{
+    height: 30px;
+    width: 60px;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: rgb(243, 243, 243);
+    transition: .4s;
+}
+
+.editButton:hover{
+    background-color: #80d798;
+}
+
+.deleteButton{
+    height: 30px;
+    width: 40px;
+    border-radius: 5px;
+    background-color: #bd1e0c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.deleteButton:hover{
+    background-color: #ed1b0c;
+}
+
+.deleteButton svg{
+    font-size: 16px;
+    color: #eee;
+}
+
+
+@media (max-width: 425px){
+    .cardContainer{
+        width: 90%;
+        height: 150px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        
+    }
+    
+    
+    
+    .dataPersonal{
+        width: 200px;
+        display: flex;
+        align-items: center;
+    }
+
+    .dataPersonal img{
+        width: 60px;
+        height: 60px;
+    }
+
+    .infoPersonal{
+        font-size: 13px;
+    }
+    
+    .infoPersonal h4{
+        margin-bottom: .2em;
+    }
+    
+    .PersonalImg{
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        margin-right: .7em;
+    }
+    
+    .buttons{
+        display: flex;
+    
+    }
+    
+    .editButton{
+        height: 25px;
+        width: 55px;
+        border-radius: 5px;
+        margin-right: 8px;
+        font-size: 12px;
+    }
+    
+    
+    .deleteButton{
+        height: 25px;
+        width: 35px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    
+    .deleteButton svg{
+        font-size: 13px;
+
+    }
+}
+
+
+@media (max-width: 375px){
+    .cardContainer{
+        width: 95%;
+        height: 150px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        
+    }
+    
+    
+    
+    .dataPersonal{
+        width: 180px;
+        display: flex;
+        align-items: center;
+    }
+
+    .dataPersonal img{
+        width: 50px;
+        height: 50px;
+    }
+
+    .infoPersonal{
+        font-size: 12px;
+    }
+    
+    .infoPersonal h4{
+        margin-bottom: .2em;
+    }
+    
+    .PersonalImg{
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        margin-right: .7em;
+    }
+    
+    .buttons{
+        display: flex;
+        
+    }
+    
+    .editButton{
+        height: 25px;
+        width: 55px;
+        border-radius: 5px;
+        margin-right: 8px;
+        font-size: 12px;
+    }
+    
+    
+    .deleteButton{
+        height: 25px;
+        width: 35px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    
+    .deleteButton svg{
+        font-size: 13px;
+
+    }
+}
+
+
+
+
+@media (max-width: 320px){
+    .cardContainer{
+        width: 95%;
+        height: 150px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        
+    }
+    
+    
+    
+    .dataPersonal{
+        width: 180px;
+        display: flex;
+        align-items: center;
+    }
+
+    .dataPersonal img{
+        width: 50px;
+        height: 50px;
+    }
+
+    .infoPersonal{
+        font-size: 11px;
+    }
+    
+    .infoPersonal h4{
+        margin-bottom: .2em;
+    }
+    
+    .PersonalImg{
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        margin-right: .7em;
+    }
+    
+    .buttons{
+        display: flex;
+        
+    }
+    
+    .editButton{
+        height: 25px;
+        width: 30px;
+        border-radius: 5px;
+        margin-right: 5px;
+        font-size: 10px;
+    }
+    
+    
+    .deleteButton{
+        height: 25px;
+        width: 25px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    
+    .deleteButton svg{
+        font-size: 11px;
+
+    }
+}
+
+
+

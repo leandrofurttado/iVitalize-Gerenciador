@@ -1,0 +1,201 @@
+.Main {
+    height: 100vh;
+}
+
+
+
+.barPersonais {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3em;
+
+}
+
+
+
+.Main hr {
+    margin: auto;
+    border-bottom: 1px solid #ddd;
+    width: 95%;
+}
+
+.cardsPersonais {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.deleteCard {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    top: 35%;
+    left: 40%;
+    z-index: 2;
+}
+
+.closeDeleteDiv{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 5px;
+    background-color: transparent;
+}
+
+.closeDeleteDiv svg{
+    color: black;
+    font-size: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.closeDeleteDiv svg:hover{
+    color: red;
+}
+
+.ButtonsDeleteDiv{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ButtonsDeleteDiv button{
+    width: 60px;
+    height: 25px;
+    border-radius: 5px;
+    margin: 0 5px;
+    font-weight: bold;
+}
+
+.deleteBtnPersonal{
+    background-color: #80d798;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.deleteBtnPersonal:hover{
+    background-color: #90edab;
+}
+
+.CanceldeleteBtnPersonal{
+    background-color: #bd1e0c;
+    cursor: pointer;
+    transition: .4s;
+    color: #FFF;
+}
+
+.CanceldeleteBtnPersonal:hover{
+    background-color: #e12d19;;
+}
+
+.overlay{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.203);
+    opacity: 0.9;
+    z-index: 1;
+
+}
+
+.paginateDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+
+.paginateDiv ul li:hover{
+    background-color: #a3eeb8;
+}
+
+.PaginationClass{
+    display: flex;
+}
+
+.PaginationClass li{
+    height:40px;
+    width: 40px;
+    text-align: center;
+    padding: 10px;
+    list-style: none;
+    cursor: pointer;
+}
+
+.PaginationClass li:active{
+    background: #80d798;
+}
+
+.activeLI{
+    background-color: #80d798;  
+}
+
+.searchInput{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0.5em;
+    background-color: rgb(243, 243, 243);
+    width: 200px;
+    height: 35px;
+    border-radius: 20px;
+}
+
+.searchInput span{
+    height: 100%;
+}
+
+.containerInput{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 350px;
+    border-radius: 30%;
+    
+}
+
+.containerInput input{
+    width: 80%;
+   background-color: transparent;
+   outline: none;
+}
+
+.containerInput svg{
+        font-size: 20px;
+        cursor: pointer;
+        color: #aaa;
+}
+
+.containerInput div svg:hover {
+    color: #707070;
+}
+
+.containerInput button{
+    width: 120px;
+    height: 35px;
+    background-color: #80d798;
+    border-radius: 15px;
+    color: #FFF;
+}
+
+.containerInput button:hover{
+    background-color: #90edab;
+}
+.containerInput a{
+    text-decoration: none;
+    color: #FFF;
+}
+
